@@ -1,0 +1,139 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage[top=3cm, bottom=2.5cm, left=3cm, right=4cm]{geometry}\usepackage[english,german]{babel} 
+\usepackage{csquotes}
+
+\usepackage[style=ieee]{biblatex}
+ 
+ 
+\parindent 0px
+\linespread{1.25} %gleich wie 1.5 in word
+\pagestyle{headings}
+
+\addbibresource{ref.bib}
+
+\begin{document} \selectlanguage{german}
+\begin{titlepage}
+ 
+  \null\vfill
+  \begin{center}
+    GYMNASIUM OTTOBRUNN
+    \vskip 2em
+    Oberstufenjahrgang 2022/2023
+    \vskip 2em
+    Seminar: Die Welt der Mathematik - die Mathematik in der Welt
+    \vskip 1em
+    Leitfach: Mathematik
+    
+    \vskip 5em
+    Exposé zur Seminararbeit
+    \vskip 2em
+    
+    {
+      \usekomafont{title} \LARGE
+        Der RSA - Algorithmus und seine Anwendung in der IT-Sicherheit
+      \par
+    }
+     
+    \vskip 1.5em
+    {\usekomafont{date}{\today \par}}%
+    \vskip 0pt plus 4fill
+    
+  \end{center}
+  Verfasser: Julian Thanner
+  \vskip 0.5em
+  Seminarleiterin: OStRin Birgit Gregor
+  \vskip 2em
+  Bewertung: .............. Punkte
+  \vskip 1em
+  Unterschrift der Seminarleiterin: \underline{\hspace{5cm}}
+ \end{titlepage}
+	
+\thispagestyle{empty}
+\tableofcontents
+\thispagestyle{empty}
+
+
+\pagebreak
+\section{Einleitung}
+%zu frei formuliert?
+Eigentlich ist es doch sehr erstaunlich, dass wir unser Geld einfach so über unser Handy verwalten können und keine Sorge haben müssen, dass jemand fremdes unerlaubt Dinge mit unserem Geld anstellt. Dies haben wir unter anderem dem RSA-Algorithmus zu verdanken, welcher einen großen Teil zu einer sichereren und geheimeren Kommunikation im Internet beiträgt.
+%oder diese EInleitung:
+\\
+
+Bei symmetrischen Verschlüsselungsverfahren gibt es einen Schlüssel um zu ent- und verschlüsseln. Das Problem hierbei ist allerdings, sie sind nur sicher, wenn es möglich ist den Schlüssel sicher zu übergeben. Dies ist aber in der Praxis nur durch ein Treffen möglich. Wenn man aber in der heutigen Zeit eine E-Mail an jemand unbekanntes schicken möchte, möchte man sich dafür nicht persönlich treffen, wodurch ein Schlüsselaustausch erschwert wird.
+
+\section{Notwendigkeit der Schlüsselübertragung}
+[Hier Beispiel Alice Bob Truhe zwei Schlösser
+
+\section*{Zeitplan}
+
+%beginn ende was 
+	\begin{tabular}{ c | c | c }
+
+ & 28. Juli & fertig geschrieben \\
+28. August &  & Korrektur lesen und Fehler korrigieren\\
+& 20. Oktober & Alles druckbereit und keine Fehler mehr\\
+& 27 Oktober & Alles fertig und gedruckt
+	\end{tabular}
+
+\section{Begriffserklärungen}
+	\subsection{Modulo Operation} %Notwendigkeit?
+	\subsection{Einwegverschlüsselungsverfahren}
+	\subsection{Eulersche $\phi$ Funktion}
+	\subsection{Satz von Euler}
+	\subsection{Der euklidische Algorithmus}
+	\subsection{Zwei Arten von Verschlüsselung}
+	\subsection{Hashen} %Rename
+
+\section{Geschichte}
+	\subsection{Erfindung}
+	Der RSA Algorithmus wurde im September 1977 von R.L. Rivest, A. Shamir und L. Adleman erfunden, damit sicher gestellt werden kann, dass E-Mails privat sind und signiert werden können. Dieser entstand auf Basis des, von Diffie und Hellman entwickelten, Public-Key Konzept. \cite{1055638}. Dieses Konzept hat dann Rivest, Shamir und Adleman motiviert eine Implementierung dafür zu entwickeln, weil Sie keine konkrete Implementierung vorgestellt haben. \cite[2]{rsaOriginalPaper} 
+%fragen ob das so indirekt zitiert passt
+
+	\subsection{Zeitliche Entwicklung}
+	\subsection{Verlauf in der IT Sicherheit}
+
+\section{Der RSA - Algorithmus}
+
+	Bemerkung
+	\begin{enumerate}
+	\item Die Buchstaben e und d leiten sich von den englischen Wörtern "encryption" (Verschlüsselung) und "decryption" (Entschlüssekung) ab.
+		\end{enumerate}
+		
+	\subsection{Schlüsselgenerierung}
+	\subsection{Ver- und Entschlüsselung}
+	\subsection{Ganze Texte Verschlüsseln}
+
+\section{Mögliche Angriffspunkte}
+	\subsection{Primfaktorzerlegung}
+	\subsection{Monoalphabetisch}
+
+\section{Anwendungsbereiche in der IT- Sicherheit}
+	\subsection{Digitale Signatur}
+	Eine digitale Nachricht besteht aus Bits, die ein Computer in Daten, wie z.B. Text übersetzt. Diese Bits bestehen aus "0" und "1". \\ 
+	Um jetzt eine Nachricht digital zu signieren, müssen die folgenden Schritte gemacht werden, um eine digitale Signatur, die auch wieder aus Bits besteht, zu erhalten.\\
+	Mithilfe des Hash-Algorithmus wird nun ein Hash-Wert der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
+	Der Decryption-Key wird dann, anders als wenn man eine geheime Nachricht versenden will, veröffentlicht.\\
+	Die originale Nachricht wird dann zusammen mit der digitalen Signatur verschickt und der Empfänger entschlüsselt diese dann mithilfe des öffentlichen Schlüssels wie folgt:\\
+	Als erstes generiert der Empfänger mithilfe des Hash-Algorithmus einen Hash-Wert von der Nachricht, die auf ihre Echtheit überprüft werden soll. Dann wird mit dem öffentlichen Schlüssel des Senders der, an die Nachricht angehängte, verschlüsselte Hash-Wert des Senders entschlüsselt. \\
+Wenn der generierte und der entschlüsselte Hash-Wert übereinstimmen, kann sicher festgestellt werden, dass die Nachricht nicht verändert wurde. \\
+Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein anderer Hash-Wert beim Empfänger für diese Nachricht herauskommen, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, dass die Nachricht verändert wurde.
+	
+	
+
+	 	
+	\subsection{Hybride Verschlüsselung}
+
+\pagebreak
+\listoffigures
+\printbibliography
+\pagebreak
+
+\begin{flushleft}
+Ich erkläre hiermit, dass ich die Seminararbeit ohne fremde Hilfe angefertigt und nur die im Literaturverzeichnis verwendeten Quellen verwendet habe.
+\end{flushleft}
+
+\end{document}
