@@ -58,11 +58,10 @@
 
 \pagebreak
 \section{Einleitung}
+\subsection{Heutige Sicherheit im Internet}
+Eigentlich ist es doch sehr erstaunlich, dass wir unser Geld einfach so über unser Handy verwalten können und keine Sorge haben müssen, dass jemand fremdes unerlaubt Dinge mit unserem Geld anstellt. Dies haben wir unter anderem dem RSA-Algorithmus zu verdanken, welcher einen großen Teil zur sicheren und geheimen Kommunikation im Internet beiträgt.
+
 \subsection{Nachteile der symmetrischen Verschlüsselung}
-%zu frei formuliert?
-Eigentlich ist es doch sehr erstaunlich, dass wir unser Geld einfach so über unser Handy verwalten können und keine Sorge haben müssen, dass jemand fremdes unerlaubt Dinge mit unserem Geld anstellt. Dies haben wir unter anderem dem RSA-Algorithmus zu verdanken, welcher einen großen Teil zu einer sichereren und geheimeren Kommunikation im Internet beiträgt.
-%oder diese EInleitung:
-\\
 
 Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrischen Verfahren (auch: Public Key Verfahren), nur einen Schlüssel für die Ent- und Verschlüsselung. Das Problem hierbei ist allerdings, sie sind nur dann sicher, wenn es möglich ist den Schlüssel sicher der anderen Seite zukommen zu lassen. In der Praxis ist das aber nur mit einem persönlichen Treffen möglich. Wenn man aber eine E-Mail an jemanden schicken möchte, mit dem man sich aktuell nicht physisch treffen kann, ist ein Schlüsselaustausch so nicht möglich.
 
@@ -76,13 +75,19 @@ Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrisc
 \section*{Zeitplan}
 
 %beginn ende was 
-	\begin{tabular}{ c | c | c }
+	\begin{tabular}{ c | c | p{10cm} }
+	Beginn & Ende & Aufgabe\\
+	 \hline
 
- & 28. Juli & fertig geschrieben \\
-28. August &  & Korrektur lesen und Fehler korrigieren\\
-& 20. Oktober & Alles druckbereit und keine Fehler mehr\\
-& 27 Oktober & Alles fertig und gedruckt
+ & 14.6 & Expose abgegeben \\
+14.6 & 28.6 & Vorbereitungen machen, wie Begriffserklärungen schreiben \\
+28.6 & 28.7 & Fertig schreiben der Seminar Arbeit, da sonst wenig Zeit \\
+28.8 & 17.9 & Korrektur lesen und Fehler korrigieren\\
+18.9 & 20.10 & Puffer/Alles druckbereit und keine Fehler mehr\\
+21.10 & 27.10 & Alles fertig und gedruckt
 	\end{tabular}
+	
+	
 
 \section{Begriffserklärungen}
 	\subsection{Modulo Operation} %Notwendigkeit?
@@ -105,7 +110,7 @@ Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrisc
 
 	Bemerkung
 	\begin{enumerate}
-	\item Die Buchstaben e und d leiten sich von den englischen Wörtern "encryption" (Verschlüsselung) und "decryption" (Entschlüssekung) ab.
+	\item Die Buchstaben e und d leiten sich von den englischen Wörtern \glqq encryption" (Verschlüsselung) und \glqq decryption" (Entschlüssekung) ab.
 		\end{enumerate}
 		
 	\subsection{Schlüsselgenerierung}
@@ -117,15 +122,20 @@ Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrisc
 	\subsection{Monoalphabetisch}
 
 \section{Anwendungsbereiche in der IT- Sicherheit}
+	\subsection{Nachrichten in Zahlen umwandeln}
+	Um Nachrichten mit dem RSA Algorithmus zu verschlüsseln und damit ein Computerprogramm diese verarbeiten kann, müssen diese erst in Zahlen umgewandelt werden. Dafür existiert der ~ASCII~ Standard, mit dem Computer Buchstaben in Zahlen umwandeln können. Jede Nachricht \textit{m} muss kleiner sein als \textit{n}. In der Realität spielt das allerdings keine Rolle, da normalerweise Werte für \textit{n} mit mehr als 100 Stellen verwendet werden und der normale ASCII Standard 7-Bit Werte und der erweiterte ASCII Standard 8-Bit Werte verwendet.\footnote{\label{foot:1}7-Bit hat Zahlen bis 128, 8-Bit bis 256}
+	
 	\subsection{Digitale Signatur}
-	Eine digitale Nachricht besteht aus Bits, die ein Computer in Daten, wie z.B. Text übersetzt. Diese Bits bestehen aus "0" und "1". \\ 
-	Um jetzt eine Nachricht digital zu signieren, müssen die folgenden Schritte gemacht werden, um eine digitale Signatur, die auch wieder aus Bits besteht, zu erhalten.\\
-	Mithilfe des Hash-Algorithmus wird nun ein Hash-Wert der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
+	
+	Eine digitale Nachricht besteht aus Bits, die ein Computer in Daten, wie z.B. Text übersetzt. Diese Bits bestehen aus \glqq 0" und \glqq 1". \\ 
+	Um nun eine Nachricht digital zu signieren, müssen die folgenden Schritte abgearbeitet werden, um eine digitale Signatur, die auch wieder aus Bits besteht, zu erhalten.\\
+	Mithilfe des Hash-Algorithmus wird nun ein Hash-Wert mithilfe einer  der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
 	Der Decryption-Key wird dann, anders als wenn man eine geheime Nachricht versenden will, veröffentlicht.\\
 	Die originale Nachricht wird dann zusammen mit der digitalen Signatur verschickt und der Empfänger entschlüsselt diese dann mithilfe des öffentlichen Schlüssels wie folgt:\\
 	Als erstes generiert der Empfänger mithilfe des Hash-Algorithmus einen Hash-Wert von der Nachricht, die auf ihre Echtheit überprüft werden soll. Dann wird mit dem öffentlichen Schlüssel des Senders der, an die Nachricht angehängte, verschlüsselte Hash-Wert des Senders entschlüsselt. \\
 Wenn der generierte und der entschlüsselte Hash-Wert übereinstimmen, kann sicher festgestellt werden, dass die Nachricht nicht verändert wurde. \\
 Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein anderer Hash-Wert beim Empfänger für diese Nachricht herauskommen, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, dass die Nachricht verändert wurde.
+	
 	
 	
 
