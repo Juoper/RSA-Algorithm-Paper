@@ -1,9 +1,10 @@
-\documentclass[14pt,a4paper]{scrartcl}
+\documentclass[12pt,a4paper]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsfonts}
 \usepackage{graphicx}
 \usepackage[top=3cm, bottom=2.5cm, left=3cm, right=4cm]{geometry}\usepackage[english,german]{babel} 
 \usepackage{csquotes}
+\usepackage{hyperref}
 
 \usepackage[style=ieee]{biblatex}
  
@@ -11,6 +12,10 @@
 \parindent 0px
 \linespread{1.25} %gleich wie 1.5 in word
 \pagestyle{headings}
+
+\newcommand*{\quelle}{%
+  \footnotesize Quelle:
+}
 
 \addbibresource{ref.bib}
 
@@ -21,9 +26,11 @@
   \begin{center}
     GYMNASIUM OTTOBRUNN
     \vskip 2em
-    Oberstufenjahrgang 2022/2023
+    Oberstufenjahrgang 2023/2024
     \vskip 2em
-    Seminar: Die Welt der Mathematik - die Mathematik in der Welt
+    Seminar: Die Welt der Mathematik \\ 
+    - \\
+    die Mathematik in der Welt
     \vskip 1em
     Leitfach: Mathematik
     
@@ -37,12 +44,10 @@
       \par
     }
      
-    \vskip 1.5em
-    {\usekomafont{date}{\today \par}}%
-    \vskip 0pt plus 4fill
+    \vskip 4.5em
     
   \end{center}
-  Verfasser: Julian Thanner
+  Verfasser:		Julian Thanner
   \vskip 0.5em
   Seminarleiterin: StDin Birgit Gregor
   \vskip 2em
@@ -58,39 +63,33 @@
 
 \pagebreak
 \section{Einleitung}
-\subsection{Heutige Sicherheit im Internet}
-Eigentlich ist es doch sehr erstaunlich, dass wir unser Geld einfach so über unser Handy verwalten können und keine Sorge haben müssen, dass jemand fremdes unerlaubt Dinge mit unserem Geld anstellt. Oder das wir einfach mal eben eine Nachricht an jemanden schicken können, ohne uns Gedanken machen zu müssen, dass jemand fremdes diese Nachrichten mitlesen kann. Wenn man sich überlegt, dass wir und die andere Seite nichts gemeines teilen, wenn wir die Person nicht kennen, wie z.B. einen Schlüssel für ein Schloss. Und auch die Zwischenpartei ist dabei nur mittelmäßig hilfreich, da wir mit dieser ja bei der ersten Benutzung auch nichts gemeinsames Teilen. Dieses Problem wird durch die asymmetrische Verschlüsselung gelöst.
-\subsection{Nachteile der symmetrischen Verschlüsselung}
 
-Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrischen Verfahren (auch: Public Key Verfahren), nur einen Schlüssel für die Ent- und Verschlüsselung. Das Problem hierbei ist allerdings, sie sind nur dann sicher, wenn es möglich ist den Schlüssel sicher der anderen Seite zukommen zu lassen. In der Praxis ist das aber nur mit einem persönlichen Treffen möglich. Wenn man aber eine E-Mail an jemanden schicken möchte, mit dem man sich aktuell nicht physisch treffen kann, ist ein Schlüsselaustausch so nicht möglich.
+\subsection{Die symmetrischen Verschlüsselung}
 
-\section*{Zeitplan}
-
-%beginn ende was 
-	\begin{tabular}{ c | c | p{10cm} }
-	Beginn & Ende & Aufgabe\\
-	 \hline
-
- & 14.6 & Expose abgegeben \\
-14.6 & 28.6 & Vorbereitungen machen, wie Begriffserklärungen schreiben \\
-28.6 & 28.7 & Fertig schreiben der Seminar Arbeit, da sonst wenig Zeit \\
-28.8 & 17.9 & Korrektur lesen und Fehler korrigieren\\
-18.9 & 20.10 & Puffer/Alles druckbereit und keine Fehler mehr\\
-21.10 & 27.10 & Alles fertig und gedruckt
-	\end{tabular}
-	
-	
+Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrischen Verfahren (auch: Public Key Verfahren), nur einen Schlüssel für die Ent- und Verschlüsselung. Diese bieten viele Vorteile, wie zum Beispiel eine kurze Schlüssellänge oder auch eine deutlich kleinere Verschlüsselungszeit. Allerdings kommt die symmetrische Verschlüsselung auch mit einigen Nachteilen, unteranderem "setzt [sie] voraus, dass Sender und Empfänger einer Nachricht, und nur diese beiden ein gemeinsames
+Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherheit}. Das stellt aber in der Praxis als ein Problem dar, weil es nicht immer möglich ist sich vor der ersten verschlüsselten Kommunikation persönlich zu treffen, dies aber für eine symmetrische Verschlüsselung nötig ist. Dafür wird eine andere Verschlüsselungsmethode benötigt, ein sogenanntes Public Key Verfahren. Hier liegt der Vorteil darin, das es einen öffentlichen und einen privaten Schlüssel gibt. Die Nachricht kann dann mit dem öffentlichen Schlüssel einer Person verschlüsselt und dann nur mit dem privaten Schlüssel wieder entschlüsselt werden. Ein Algorithmus dafür ist der RSAßAlgorithmus, den ich im folgenden erklären möchte.
 
 \section{Begriffserklärungen}
 	\subsection{Modulo Operation} %Notwendigkeit?
+	Die Modulo Operation gibt den Rest einer ganzzahligen Division zurück.
+	$$ {7 \bmod 4 = 3} $$
+	$$ {16 \bmod 3 = 1} $$
 	\subsection{Einwegverschlüsselungsverfahren}
+	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großem Quelltext eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man könnte eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Ein gutes Beispiel für eine Einwegfunktion, wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
+	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und diese: ${20 \bmod 3}$ beide als Ergebnis 2. Es lässt sich aber nicht zurückschließen mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256. Diese haben unteranderem die folgenden Anwendungen:
+	
+	%TODO Anwendungen Ausformulieren
+	
 	\label{ch:einweg}
 	\subsection{Eulersche $\phi$ Funktion}
+	Die Eulersche $\phi$ Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das heißt der größte gemeinsame Teiler dieser Zahlen ist 1. Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ nicht durch ${2, 4, 5, 6, 7 }$ und $8$ teilbar ist. Bei Primzahlen ist die $\phi$ Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt: $${\phi(p) = p - 1}$$
+	Nochdazu ist diese Funktion Multiplikativ, also gilt: ${\phi(p * q) = \phi(p) * \phi(q)}$.
+	Daraus folgt, das für Primzahlen gelten muss:
+	$${\phi(p * q) = (p - 1) * (q - 1)}$$
 	\subsection{Satz von Euler}
 	\subsection{Der euklidische Algorithmus}
 	\subsection{Zwei Arten von Verschlüsselung}
-	\subsection{Hashen} %Rename
-
+	UNNÖTIG??
 \section{Geschichte}
 	\subsection{Erfindung}
 	\subsection{Zeitliche Entwicklung}
@@ -99,12 +98,24 @@ Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrisc
 \section{Der RSA - Algorithmus}
 		
 	\subsection{Schlüsselgenerierung}
+Die für den RSA-Algorithmus benötigten Schlüssel können sehr einfach generiert werden.
+\begin{itemize}
+\item Als erstes werden zwei Primzahlen p und q gewählt, in einer reelen Anwendung sollte hierbei auf die in \autoref{chap:primnumberselection} genannten Anforderungen geachtet werden  
+\item 2. Ebene
+\item 3. Ebene
+\item 4. Ebene
+\end{itemize}
+
+	
 	\subsection{Ver- und Entschlüsselung}
 	\subsection{Ganze Texte Verschlüsseln}
 
 \section{Mögliche Angriffspunkte}
 	\subsection{Primfaktorzerlegung}
 	\subsection{Monoalphabetisch}
+	\subsection{Die Wahl der Primzahlen}
+	\label{chap:primnumberselection}
+
 \pagebreak
 
 \section{Anwendungsbereiche in der IT - Sicherheit}
@@ -124,7 +135,8 @@ Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein an
 
 
 \begin{figure}
-\includegraphics[scale=0.45]{Dokument_digitale_Signatur}
+\includegraphics[scale=0.45]{Dokument_digitale_Signatur} \\
+\quelle\url{https://www.docusign.de/static-c-assets/Dokument_digitale_Signatur.png}
 \caption{Abbildung zu Digitalen Signaturen}
 \label{fig:figure3}
 \end{figure}
