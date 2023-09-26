@@ -74,14 +74,25 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	Die Modulo Operation gibt den Rest einer ganzzahligen Division zurück.
 	$$ {7 \bmod 4 = 3} $$
 	$$ {16 \bmod 3 = 1} $$
+	
+	\subsection{Multiplikatives Inverses}
+	"Das multiplikativ inverse Element $a^{-1}$ eines Elements a in der Gruppe $\mathbb{Z}_n ^*$ ist das eindeutig bestimmte Element, für das gilt $${a^{-1} * a  =  a * a^{-1}  =  1}$$ wobei 1 das neutrale Element der Gruppe ist." \cite{hwlang}
+	
+	
 	\subsection{Einwegverschlüsselungsverfahren}
 	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großem Quelltext eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man könnte eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Ein gutes Beispiel für eine Einwegfunktion, wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
 	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und diese: ${20 \bmod 3}$ beide als Ergebnis 2. Es lässt sich aber nicht zurückschließen mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256. Diese haben unteranderem die folgenden Anwendungen:
 	
 	%TODO Anwendungen Ausformulieren
+	\begin{itemize}
+	\item
+	
+	\end{itemize}
 	
 	\label{ch:einweg}
 	\subsection{Eulersche $\phi$ Funktion}
+	\label{cha:phi}
+	
 	Die Eulersche $\phi$ Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das heißt der größte gemeinsame Teiler dieser Zahlen ist 1. Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ nicht durch ${2, 4, 5, 6, 7 }$ und $8$ teilbar ist. Bei Primzahlen ist die $\phi$ Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt: $${\phi(p) = p - 1}$$
 	Nochdazu ist diese Funktion Multiplikativ, also gilt: ${\phi(p * q) = \phi(p) * \phi(q)}$.
 	Daraus folgt, das für Primzahlen gelten muss:
@@ -90,31 +101,45 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	\subsection{Der euklidische Algorithmus}
 	\subsection{Zwei Arten von Verschlüsselung}
 	UNNÖTIG??
-\section{Geschichte}
-	\subsection{Erfindung}
-	\subsection{Zeitliche Entwicklung}
-	\subsection{Verlauf in der IT Sicherheit}
 
 \section{Der RSA - Algorithmus}
 		
 	\subsection{Schlüsselgenerierung}
-Die für den RSA-Algorithmus benötigten Schlüssel können sehr einfach generiert werden.
+Die für den RSA-Algorithmus benötigten Schlüssel können sehr einfach generiert werden. Der Verschlüsselungsschlüssel besteht dabei aus $(e, n)$ und er Entschlüsselungsschlüssel besteht aus $(d, n)$. Dabei steht $e$ für encryption und $d$ für decryption 
 \begin{itemize}
-\item Als erstes werden zwei Primzahlen p und q gewählt, in einer reelen Anwendung sollte hierbei auf die in \autoref{chap:primnumberselection} genannten Anforderungen geachtet werden  
-\item 2. Ebene
-\item 3. Ebene
-\item 4. Ebene
+\item Als erstes werden zwei Primzahlen $p$ und $q$ gewählt, in einer reelen Anwendung sollte hierbei auf die in \ref{chap:primnumberselection} genannten Anforderungen geachtet werden  
+\item Mit diesen wird dann $n$ aus dem Produkt von $p$ und $q$ berechnet
+\item Danach wird eine große zufällige Zahl $d$ gewählt, welche teilerfremd zu ${\phi(n)}$\footnote{Zur einfachen Berechnung von ${\phi(n)}$ siehe \ref{cha:phi}} ist, das heißt:
+$${ggT(d, \phi(n)) = 1}$$ 
+\item Nun wird \textit{e} so berechnet, dass es das multiplikative Inverse von \textit{d} ist:
+$${e * d = 1 \bmod \phi(n)}$$
 \end{itemize}
 
+\begin{figure}
+\includegraphics[scale=0.3]{Orange_blue_public_private_keygeneration} \\
+\caption{Schlüsselgenerierung (aus \cite{wikipedia})}
+\label{fig:figure1}
+\end{figure}
+
+Jetzt hat man den Verschlüsselungsschlüssel bestehend aus $(e, n)$ und den Entschlüsselungsschlüssel $(d, n)$. \\
+$p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese Rückschlüsse auf $d$ möglich machen.
 	
 	\subsection{Ver- und Entschlüsselung}
+	
 	\subsection{Ganze Texte Verschlüsseln}
 
 \section{Mögliche Angriffspunkte}
 	\subsection{Primfaktorzerlegung}
+	Es ist sehr schwierig eine Zahl $n$, die keine Primzahl ist, in ihre Primfaktoren zu zerlegen. Aktuell gibt es keinen Algorithmus, der dies für sehr große Zahlen bewältigen kann. Sollte es einen Algorithmus geben, der die Primfaktorzerlegung in sehr kurze Zeit bewältigen kann, würde das heißen, dass der RSA-Algorithmus nicht mehr sicher ist, da man sich dann sehr leicht $p$ und $q$ aus dem immer veröffentlichten $n$ berechnen kann und somit alle Schlüssel berechnen kann.
+	
+	Zum Beispiel benötigt der Quadratic Sieve Algorithmus aktuell um eine Zahl mit 512 Bits zu zerlegen aktuell bei 200.000.000 Befehle pro Sekunde in etwa 11700 Jahre. \cite[S. 115]{Beutelspacher2015-jl}
+	Aktuell wird ein Schlüssel mit mehr als 3000 Bits als sicher angesehen. \cite[29]{bsireco}
+	%TODO erklärung bit größe
+	 
 	\subsection{Monoalphabetisch}
 	\subsection{Die Wahl der Primzahlen}
 	\label{chap:primnumberselection}
+	\subsection{Veröffentlichung von $n$}
 
 \pagebreak
 
