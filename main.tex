@@ -98,6 +98,8 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	Daraus folgt, das für Primzahlen gelten muss:
 	$${\phi(p * q) = (p - 1) * (q - 1)}$$
 	\subsection{Satz von Euler}
+	Nur wenn zu wenig text
+	
 	\subsection{Der euklidische Algorithmus}
 	\subsection{Zwei Arten von Verschlüsselung}
 	UNNÖTIG??
@@ -125,8 +127,41 @@ Jetzt hat man den Verschlüsselungsschlüssel bestehend aus $(e, n)$ und den Ent
 $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese Rückschlüsse auf $d$ möglich machen.
 	
 	\subsection{Ver- und Entschlüsselung}
+	Als erstes müssen wir unsere Nachricht auf eine Länge zwischen 0 und $n-1$ bringen. (Für längere Nachrichten siehe \ref{cha:hole_text})
+	Zum Verschlüsseln unserer Nachricht \textit{m} werden nun der öffentliche Schlüssel ($e, n$) und $m \in \mathbb{N}$ benötigt. (\textit{e} und \textit{n} sind hierbei positive Zahlen)\footcite[][6]{rsaOriginalPaper} Danach wird \textit{m} wie folgt in \textit{c} verschlüsselt: 
+	$$c = m^e \bmod n$$
+	Für die Entschlüsselung wird der gleiche Prozess wiederholt, nur das für \textit{m} diesmal \textit{c} verwendet wird und anstatt \textit{e} wird dann \textit{d} verwendet:
+	$$m = c^d \bmod n$$
 	
+	\begin{figure}
+	\includegraphics[scale=0.05]{Orange_blue_public_key_cryptography_de.svg.png} \\
+	\caption{Der Ver- und Entschlüsselungsprozess (aus \cite{wikipedia})}
+	\label{fig:figure1}
+	\end{figure}
+	
+	Als Beispiel verschlüsseln wir die Zahl $m = 76$. Hierbei sind $e=65537$ und $n=143$.
+
+	\begin{equation}
+	\begin{split}
+	c & = m^e \bmod n = \\
+	 &  = 76^{65537} \bmod 143 = \\
+ 	& = 98
+	\end{split}
+	\end{equation}
+	Unsere Verschlüsselte Nachricht ist nun also $c = 98$. Um daraus wieder \textit{m} zu berechen brauchen wir jetzt noch $d$.
+
+	\begin{equation}
+	\begin{split}
+	m & = c^d \bmod n = \\
+	 &  = 98^{113} \bmod 143 = \\
+ 	& = 76
+	\end{split}
+	\end{equation}
+
+
 	\subsection{Ganze Texte Verschlüsseln}
+	\label{cha:hole_text}
+
 
 \section{Mögliche Angriffspunkte}
 	\subsection{Primfaktorzerlegung}
@@ -139,8 +174,6 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 	\subsection{Monoalphabetisch}
 	\subsection{Die Wahl der Primzahlen}
 	\label{chap:primnumberselection}
-	\subsection{Veröffentlichung von $n$}
-
 \pagebreak
 
 \section{Anwendungsbereiche in der IT - Sicherheit}
@@ -161,7 +194,7 @@ Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein an
 
 \begin{figure}
 \includegraphics[scale=0.45]{Dokument_digitale_Signatur} \\
-\caption{Digitalen Signaturen (aus \cite{digitalsignature})}
+\caption{Ein DOkument digital signieren (aus \cite{digitalsignature})}
 \label{fig:figure3}
 \end{figure}
 
