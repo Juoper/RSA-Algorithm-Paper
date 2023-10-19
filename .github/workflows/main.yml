@@ -31,11 +31,4 @@ jobs:
           prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: main.pdf
-          asset_name: thesis.pdf
-          asset_content_type: application/pdf
+        uses: softprops/action-gh-release@v1
