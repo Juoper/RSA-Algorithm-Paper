@@ -13,9 +13,6 @@
 \linespread{1.25} %gleich wie 1.5 in word
 \pagestyle{headings}
 
-\newcommand*{\quelle}{%
-  \footnotesize Quelle:
-}
 
 \addbibresource{ref.bib}
 
@@ -28,9 +25,7 @@
     \vskip 2em
     Oberstufenjahrgang 2023/2024
     \vskip 2em
-    Seminar: Die Welt der Mathematik \\ 
-    - \\
-    die Mathematik in der Welt
+    Seminar: \\ Die Welt der Mathematik - die Mathematik in der Welt
     \vskip 1em
     Leitfach: Mathematik
     
@@ -47,7 +42,7 @@
     \vskip 4.5em
     
   \end{center}
-  Verfasser:		Julian Thanner
+  Verfasser: \hspace{1cm} Julian Thanner
   \vskip 0.5em
   Seminarleiterin: StDin Birgit Gregor
   \vskip 2em
@@ -67,7 +62,10 @@
 \subsection{Die symmetrischen Verschlüsselung}
 
 Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrischen Verfahren (auch: Public Key Verfahren), nur einen Schlüssel für die Ent- und Verschlüsselung. Diese bieten viele Vorteile, wie zum Beispiel eine kurze Schlüssellänge oder auch eine deutlich kleinere Verschlüsselungszeit. Allerdings kommt die symmetrische Verschlüsselung auch mit einigen Nachteilen, unteranderem "setzt [sie] voraus, dass Sender und Empfänger einer Nachricht, und nur diese beiden ein gemeinsames
-Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherheit}. Das stellt aber in der Praxis als ein Problem dar, weil es nicht immer möglich ist sich vor der ersten verschlüsselten Kommunikation persönlich zu treffen, dies aber für eine symmetrische Verschlüsselung nötig ist. Dafür wird eine andere Verschlüsselungsmethode benötigt, ein sogenanntes Public Key Verfahren. Hier liegt der Vorteil darin, das es einen öffentlichen und einen privaten Schlüssel gibt. Die Nachricht kann dann mit dem öffentlichen Schlüssel einer Person verschlüsselt und dann nur mit dem privaten Schlüssel wieder entschlüsselt werden. Ein Algorithmus dafür ist der RSAßAlgorithmus, den ich im folgenden erklären möchte.
+Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherheit}. Das stellt aber in der Praxis als ein Problem dar, weil es nicht immer möglich ist sich vor der ersten verschlüsselten Kommunikation persönlich zu treffen, dies aber für eine symmetrische Verschlüsselung nötig ist. Dafür wird eine andere Verschlüsselungsmethode benötigt, ein sogenanntes Public Key Verfahren. Hier liegt der Vorteil darin, das es einen öffentlichen und einen privaten Schlüssel gibt. Die Nachricht kann dann mit dem öffentlichen Schlüssel einer Person verschlüsselt und dann nur mit dem privaten Schlüssel wieder entschlüsselt werden. Ein Algorithmus dafür ist der RSA-Algorithmus, den ich im folgenden erklären möchte.
+
+\pagebreak
+
 
 \section{Begriffserklärungen}
 	\subsection{Modulo Operation} %Notwendigkeit?
@@ -76,8 +74,13 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	$$ {16 \bmod 3 = 1} $$
 	
 	\subsection{Multiplikatives Inverses}
-	"Das multiplikativ inverse Element $a^{-1}$ eines Elements a in der Gruppe $\mathbb{Z}_n ^*$ ist das eindeutig bestimmte Element, für das gilt $${a^{-1} * a  =  a * a^{-1}  =  1}$$ wobei 1 das neutrale Element der Gruppe ist." \cite{hwlang}
+	"Das multiplikativ inverse Element $a^{-1}$ eines Elements a in der Gruppe $\mathbb{Z}_n ^*$ ist das eindeutig bestimmte Element, für das gilt $${a^{-1} * a  =  a * a^{-1}  =  1}$$ wobei 1 das neutrale Element der Gruppe ist." \cite{hwlang} \\
 	
+	So ist zum Beispiel das multiplikative Inverse $a$ von 3, $a=2$, weil: \\
+	${3 * 2 = 6 = 1 \bmod 5}$ \\
+	
+	Für das Beispiel ${5 * a = 1 \bmod 5}$ wäre $a=5$, weil \\
+	${5 * 5 = 25 = 1 \bmod 5}$ \\
 	
 	\subsection{Einwegverschlüsselungsverfahren}
 	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großem Quelltext eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man könnte eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Ein gutes Beispiel für eine Einwegfunktion, wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
@@ -97,12 +100,12 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	Nochdazu ist diese Funktion Multiplikativ, also gilt: ${\phi(p * q) = \phi(p) * \phi(q)}$.
 	Daraus folgt, das für Primzahlen gelten muss:
 	$${\phi(p * q) = (p - 1) * (q - 1)}$$
+	
+	Somit ist es sehr einfach $\phi(n)$ zu berechnen, wenn $p$ und $q$ Primzahlen sind.
 	\subsection{Satz von Euler}
 	Nur wenn zu wenig text
 	
 	\subsection{Der euklidische Algorithmus}
-	\subsection{Zwei Arten von Verschlüsselung}
-	UNNÖTIG??
 
 \section{Der RSA - Algorithmus}
 		
@@ -159,8 +162,10 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 	\end{equation}
 
 
-	\subsection{Ganze Texte Verschlüsseln}
-	\label{cha:hole_text}
+	\subsection{Verschlüsselung ganzer Texte}
+		\label{cha:hole_text}
+
+	Die Schwierigkeit, ganze Texte zu verschlüsseln, liegt darin, dass die Nachricht $m$ nicht großer als $n - 1$ sein darf. Eine Möglichkeit dieses Problem zu umgehen ist es die Nachricht in verschiedene kleine Blöcke zu unterteilen und dann jeden Block einzeln zuverschlüsseln. Das hat aber immer noch den Nachteil, dass der RSA Algorithmus sehr langsam ist, und deshalb für eine große Nachricht $m$, auch wenn sie in kleine Blöcke unterteilt ist, sehr lange brauchen würde. Eine sinnvollere, und auch weit aus verbreitete Lösung ist es mit dem RSA Algorithmus einen symmetrischen Schlüssel zu verschlüsseln, mehr dazu in Kapitel \ref{cha:hybrid}.
 
 
 \section{Mögliche Angriffspunkte}
@@ -171,45 +176,66 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 	Aktuell wird ein Schlüssel mit mehr als 3000 Bits als sicher angesehen. \cite[29]{bsireco}
 	%TODO erklärung bit größe
 	 
-	\subsection{Monoalphabetisch}
-	\subsection{Die Wahl der Primzahlen}
-	\label{chap:primnumberselection}
+	\subsection{Monoalphabetische Verschlüsselung}
+	Sehr einfachen Kryptosystem, wie z.B. die Caesar-Verschlüsselung, setzen oftmals auf eine Monoalphabetische Verschlüsselung, das heißt es wird jedem Buchstaben ein anderer Buchstabe zugeordnet. Wenn man immer einzelne Buchstaben mit dem RSA-Algorithmus verschlüsselt, hat man das Problem, das diese immer dem gleichen verschlüsselten Buchstaben zugeordnet werden. (Wie in Grafik \ref{fig:figure4} bei A und B zu sehen). Dadurch ist die Verschlüsselung dann nicht mehr sicher und kann sehr einfach mit Hilfe von statistischen Tabellen über die Häufigkeit eines Buchstabens geknackt werden. \footnote{Für mehr Infos dazu siehe \cite{mono}}
+	
+	Um diese Schwachstelle zu beseitigen, kann man anstatt einzelne Buchstaben zu verschlüsseln, ganze Blöcke an Buchstaben verschlüsseln. Hierbei ist zu beachten, dass jeder Block, umgerechnet in eine Zahl, kleiner als \textit{n} sein muss. Jetzt ist es nicht mehr möglich Rückschlüsse auf die verwendeten Buchstaben zu machen, z.B. wurden bei den unteren beiden Beispielen in Abbildung \ref{fig:figure4} nur A und B getauscht und es kommt eine ganz andere Zahl raus.
+
+
+\begin{figure}		
+\includegraphics[scale=0.45]{rsa_mono} \\
+\caption{Verschlüsselung verschiedener Buchstaben mithilfe des ASCII Standards und des RSA-Algorithmus}
+\label{fig:figure4}
+\end{figure}
+	
+\subsection{Die Wahl der Primzahlen}
+
+
+\label{chap:primnumberselection}
 \pagebreak
 
 \section{Anwendungsbereiche in der IT - Sicherheit}
 	\subsection{Digitale Nachrichten}
-Um Nachrichten mit einem Computer verarbeiten zu können, müssen diese erst in Zahlen umgewandelt werden. Dafür existiert der ~ASCII~ Standard, mit dem Computer Buchstaben in Zahlen umwandeln können. Jede Nachricht \textit{m} muss kleiner sein als \textit{n}. In der Realität spielt das allerdings keine Rolle, da normalerweise Werte für \textit{n} mit mehr als 100 Stellen verwendet werden und der normale ASCII Standard 7-Bit Werte und der erweiterte ASCII Standard 8-Bit Werte verwendet.\footnote{7-Bit hat Zahlen bis 128, 8-Bit bis 256}
+Um eine Nachricht, hier genannt \textit{m}, mit einem Computer verarbeiten zu können, muss diese erst in Zahlen umgewandelt werden. Dafür existiert der ~ASCII~ Standard, mit dem Computer Buchstaben in Zahlen umwandeln können. Jede Nachricht \textit{m} muss kleiner sein als \textit{n}. In der Realität spielt das allerdings keine Rolle, da normalerweise Werte für \textit{n} mit mehr als 100 Stellen verwendet werden und der normale ASCII Standard 7-Bit Werte und der erweiterte ASCII Standard 8-Bit Werte verwendet.\footnote{7-Bit hat Zahlen bis 128, 8-Bit bis 256}
 	
 	\subsection{Digitale Signatur}
-	Der RSA-Algorithmus kann auch genutzt werden, um Nachrichten zu signieren. Durch das signieren von z.B. Emails kann der Empfänger sicherstellen, dass die Nachricht von dem Besitzer des zugehörigen privaten Schlüssels verschickt wurde. Diese Funktion der Signatur wird auch genutzt, um die Fälschungssicherheit und Originalität von  Dokumenten sicherzustellen. Um bei einer Signatur nicht die Länge der Nachricht zu verdoppeln, wird diese mithilfe einer Einwegfunktion auf eine vordefinierte Länge gebracht.\footnote{Siehe Kapitel \ref{ch:einweg} auf Seite \pageref{ch:einweg}}\\
+	Der RSA-Algorithmus kann auch genutzt werden, um Nachrichten zu signieren. Durch das Signieren von z.B. Emails kann der Empfänger sicherstellen, dass die Nachricht von dem Besitzer des zugehörigen privaten Schlüssels verschickt wurde. Diese Funktion der Signatur wird auch genutzt, um die Fälschungssicherheit und Originalität von  Dokumenten sicherzustellen. Um bei einer Signatur nicht die Länge der Nachricht zu verdoppeln, wird diese mithilfe einer Einwegfunktion auf eine vordefinierte Länge gebracht.\footnote{Siehe Kapitel \ref{ch:einweg} auf Seite \pageref{ch:einweg}}\\
 
-Als erstes wandelt man die Nachricht mithilfe eines Standards zum umwandeln von Buchstaben in Zahlen um. Meistens wird hierbei der (erweiterte) ASCII Standard verwendet. %TODO footnote zur oberen footnote
-Mithilfe des Hash-Algorithmus wird nun ein Hash-Wert mithilfe einer  der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
+Als erstes wandelt man die Nachricht mithilfe eines Standards in Zahlen um. Mithilfe eines Hashing-Algorithmus wird nun der Hash-Wert der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
 	Der Decryption-Key wird dann, anders als wenn man eine geheime Nachricht versenden will, veröffentlicht.\\
 	Die originale Nachricht wird dann zusammen mit der digitalen Signatur verschickt und der Empfänger entschlüsselt diese dann mithilfe des öffentlichen Schlüssels wie folgt:\\
 	Als erstes generiert der Empfänger mithilfe des Hash-Algorithmus einen Hash-Wert von der Nachricht, die auf ihre Echtheit überprüft werden soll. Dann wird mit dem öffentlichen Schlüssel des Senders der, an die Nachricht angehängte, verschlüsselte Hash-Wert des Senders entschlüsselt. \\
 Wenn der generierte und der entschlüsselte Hash-Wert übereinstimmen, kann sicher festgestellt werden, dass die Nachricht nicht verändert wurde. \\
-Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein anderer Hash-Wert beim Empfänger für diese Nachricht herauskommen, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, dass die Nachricht verändert wurde.
+Wenn z.B. jetzt eine dritte Person die Nachricht abändern würde, würde ein anderer Hash-Wert beim Empfänger für diese Nachricht herauskommen, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, ob die Nachricht im Original vorliegt, denn wenn dem nicht so ist stimmen die Hash-Werte nicht mehr überein.\\
 
+
+%TODO wenn noch mehr text  --> https/tls
 
 \begin{figure}
 \includegraphics[scale=0.45]{Dokument_digitale_Signatur} \\
-\caption{Ein DOkument digital signieren (aus \cite{digitalsignature})}
+\caption{Ein Dokument digital signieren (aus \cite{digitalsignature})}
 \label{fig:figure3}
 \end{figure}
 
+Das ganze funktioniert dann wie folgt:
 
 Als erstes berechnet man den Hash-Wert mithilfe einer Einwegfunktion:
 $$ {h = e(m)} $$
 
 Dann berechnet man mit dem RSA-Algorithmus die Signatur \textit{s}
-$$ {s = h^d \bmod n} $$
+$$ {s = h^e \bmod n} $$
 
-Zum überprüfen der Signatur wird erneut h bestimmt und mit dem empfangenen \textit{h} verglichen
-$$ {h = s^e \bmod n} $$
+Diese Signatur wird dann an die Nachricht angehängt und dann wird diese veröffentlicht.
+Der Empfänger kann dann mit den folgenden Schritten die Integrität der Nachricht sicherstellen:
+
+Als erster wird erneut h von der empfangenen Nachricht $m$ bestimmt:
+$${h_{empfangen} = e(m) }$$
+Dann muss die Signatur wieder entschlüsselt werden:
+$$ {h_{entschluesselt} = s^d \bmod n} $$
+Anschließend werden diese beiden Hashwerte verglichen und wenn diese gleich sind, kann man davon ausgehen, dass die Nachricht nicht verändert wurde. \\
+
 
 Beispiel: Die digitale Signatur von \textit{m} = 8:\\ 
-
 Angenommen:
 $${ \textit{m} = 8 }$$
 $${ \textit{n} = 187 }$$
@@ -221,10 +247,31 @@ Erst wird der Hash-Wert von \textit{m} berechnet...
 $$ {16 = e(8)} $$	
 
 ...und dann mit der RSA-Funktion verschlüsselt: %richtige Formulierung?
-$$ {s = 16^d \bmod n} $$	
+$$ {152 = 16^19 \bmod 187} $$	
+
+Um jetzt sicherzustellen, dass die Nachricht nicht verändert wurde, wird erneut der Hash Wert berechnet:
+$$ {16 = e(8)} $$	
+und dann die Signatur $s$ entschlüsselt:
+$$ {16 = 152^59 \bmod 187} $$
+
+Und jetzt werden diese Beiden wieder verglichen und es wird ersichtlich, das $m$ nicht verändert wurde.
+
 
 	 	
 	\subsection{Hybride Verschlüsselung}
+		\label{cha:hybrid}
+		\begin{figure}
+		
+\includegraphics[scale=0.45]{rsa_time} \\
+\caption{Decryption time vs. File size for DES, 3DES, AES, Blowfish and RSA (aus \cite{rsatime})}
+\label{fig:figure5}
+\end{figure}
+		
+		Wenn man große Texte bzw. Dateien verschlüsseln möchte, brauchen verschieden Algorithmen unterschiedlich lange. Bei der Verschlüsselung mit dem RSA-Algorithmus entsteht das große Problem, dass dieser für immer größer  werdende Texte immer länger braucht, wie in Abbildung \ref{fig:figure5} zu sehen ist. 
+
+		Hierfür kann dann das Konzept der hybriden Verschlüsselung genutzt werden. Dabei kombiniert man eine asymmetrisches und eines symmetrisches Verschlüsselungsverfahren. Diese bringt den Vorteil mit sich, dass die Vorteile  beider Verfahren kombiniert werden können. Das ganze hat aber auch einige Nachteile z.B. muss man dafür beide Verfahren implementieren und die Sicherheit der hybriden Verschlüsselung ist jetzt abhängig von zwei verschiedenen Verschlüsselungsalgorithmen. \\
+		Um nun eine Nachricht verschlüsselt versenden zu können, ohne lange auf die Verschlüsselung warten zu müssen, wird als erstes ein symmetrischer Schlüssel zufällig generiert werden. Mit diesem wird dann die Nachricht verschlüsselt. Dann wird der asymmetrisch verschlüsselte symmetrische Schlüssel zusammen mit der verschlüsselten Nachricht versendet.
+
 
 \pagebreak
 \section{Anhang}
