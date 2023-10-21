@@ -106,7 +106,19 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	Nur wenn zu wenig text
 	
 	\subsection{Der euklidische Algorithmus}
+	 Mit dem erweiterten Euklidischen Algorithmus kann der größte gemeinsame Teiler ggt(a,b) von zwei ganzen Zahlen a und b berechnet werden.
+	 Dabei wird in jedem Schritt $a / b = q$ gerechnet. Dabei wird nach jedem Schritt $a=b$ und $b = r$ gesetzt. $r$ ist dabei der Rest der division. Die Iteration endet, wenn $b=0$. Der größte gemeinsame Teiler ggt(a, b) ist dann $a$. Im Folgenden wird das ganze mit einem Beispiel, wo $a = 74$ und $b = 38$ ist. \\
+	 \begin{tabular}{ c c c c c c c}
+ 		a & : & b & = & q & & r \\ 
+ 		74 & : & 38 & = & 1 & Rest & 36\\ 
+ 		38 & : & 36 & = & 1 & Rest & 2\\ 
+ 		36 & : & 2 & = & 18 & Rest & 0\\
+ 		2 & : & 0 & \\
+	\end{tabular}\\
+	Bei diesem Beispiel wäre der ggt(a, b) nun 2.
 
+	
+\pagebreak
 \section{Der RSA - Algorithmus}
 		
 	\subsection{Schlüsselgenerierung}
