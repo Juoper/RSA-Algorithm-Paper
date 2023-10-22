@@ -8,7 +8,7 @@
 
 \usepackage[style=ieee]{biblatex}
  
- \graphicspath{ {./media/} } 
+\graphicspath{ {./media/} } 
 \parindent 0px
 \linespread{1.25} %gleich wie 1.5 in word
 \pagestyle{headings}
@@ -106,8 +106,8 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	Nur wenn zu wenig text
 	
 	\subsection{Der euklidische Algorithmus}
-	 Mit dem erweiterten Euklidischen Algorithmus kann der größte gemeinsame Teiler ggt(a,b) von zwei ganzen Zahlen a und b berechnet werden.
-	 Dabei wird in jedem Schritt $a / b = q$ gerechnet. Dabei wird nach jedem Schritt $a=b$ und $b = r$ gesetzt. $r$ ist dabei der Rest der division. Die Iteration endet, wenn $b=0$. Der größte gemeinsame Teiler ggt(a, b) ist dann $a$. Im Folgenden wird das ganze mit einem Beispiel, wo $a = 74$ und $b = 38$ ist. \\
+	 Mit dem erweiterten Euklidischen Algorithmus kann der größte gemeinsame Teiler ggT(a,b) von zwei ganzen Zahlen a und b berechnet werden.
+	 Dabei wird in jedem Schritt $a / b = q$ gerechnet. Dabei wird nach jedem Schritt $a=b$ und $b = r$ gesetzt. $r$ ist dabei der Rest der division. Die Iteration endet, wenn $b=0$. Der größte gemeinsame Teiler ggT(a, b) ist dann $a$. Im Folgenden wird das ganze mit einem Beispiel, wo $a = 74$ und $b = 38$ ist. \\
 	 \begin{tabular}{ c c c c c c c}
  		a & : & b & = & q & & r \\ 
  		74 & : & 38 & = & 1 & Rest & 36\\ 
@@ -115,7 +115,7 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
  		36 & : & 2 & = & 18 & Rest & 0\\
  		2 & : & 0 & \\
 	\end{tabular}\\
-	Bei diesem Beispiel wäre der ggt(a, b) nun 2.
+	Bei diesem Beispiel wäre der ggT(a, b) nun 2.
 
 	
 \pagebreak
@@ -158,8 +158,8 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 
 	\begin{equation}
 	\begin{split}
-	c & = m^e \bmod n = \\
-	 &  = 76^{65537} \bmod 143 = \\
+	c & = m^e \bmod n \\
+	 &  = 76^{65537} \bmod 143 \\
  	& = 98
 	\end{split}
 	\end{equation}
@@ -167,13 +167,40 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 
 	\begin{equation}
 	\begin{split}
-	m & = c^d \bmod n = \\
-	 &  = 98^{113} \bmod 143 = \\
+	m & = c^d \bmod n \\
+	 &  = 98^{113} \bmod 143 \\
  	& = 76
 	\end{split}
 	\end{equation}
 
+	\subsection{Die Mathematik hinter dem RSA-Algorithmus}
+	Um verstehen zu können, warum RSA funktioniert, muss man mathematisch die Gültigkeit der Gleichung
+	\begin{equation}\label{eq:fermat}
+ m = c^d \bmod n
+ \end{equation}
 
+ beweisen, sodass $c^d \bmod n$ wieder $m$ ergibt. Dafür wird der Satz von Euler-Fermat benutzt: \\
+	Sind a und n teilerfremde Zahlen mit $1 < a < n$, so gilt
+	$$a^{\phi (n)} \equiv 1 \bmod n $$
+	
+	Dieser Satz soll hier nicht bewiesen werden, sondern es soll im folgenden die Gleichung (\ref{eq:fermat}) bewiesen werden, wenn $x \neq p$ und $x \neq q$ gilt, da für den Satz von Euler-Fermat $x$ und $n = p*q$ teilerfremd sein müssen. $x$ stellt hierbei unsere Nachricht m und y unsere verschlüsselte Nachricht c da. \\
+	Es folgt also:
+	
+	\begin{align*}
+	 y^d \bmod n & = (x^e \bmod n)^d \bmod n & \\
+	 & = (x^e)^d \bmod n &\\
+ 	 & =x^{ed} \bmod n &  \parbox[t]{4cm}{e ist das multiplikative Inverse zu d, also $e * d \bmod m \equiv 1$ es folgt also daraus, dass es kein $k \in \mathbb{Z}$ gibt, so dass $e*d=k*m+1$}\\
+ 	 & =x^{k*m+1} \bmod n & \\
+ 	 & =x^{k*m}*m \bmod n & \\
+ 	 & =((x^m)^k \bmod n) * (x \bmod n) \bmod n & \\
+ 	 & =(x^m \bmod n)^k * (x \bmod n) \bmod n & \\
+ 	 & =(1^k \bmod n) * (x \bmod n) \bmod n &  \parbox[t]{4cm}{wegen des Satzes von Euler-Fermat (sofern x und n teilerfremd sind), da $m = (p - 1)(q - 1) = \phi(n)$ gesetzt wurde} \\
+ 	 & = 1 * x \bmod n & \\
+ 	 & = x &
+ 	\end{align*}
+
+	Mit dieser Umformung konnte die Gleichung \ref{eq:fermat} bewiesen werden 
+	
 	\subsection{Verschlüsselung ganzer Texte}
 		\label{cha:hole_text}
 
@@ -201,9 +228,11 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 \end{figure}
 	
 \subsection{Die Wahl der Primzahlen}
-
-
 \label{chap:primnumberselection}
+Wahrscheinlich entfernen
+
+ nicht zu nah beieinander \cite{rowland} \\
+
 \pagebreak
 
 \section{Anwendungsbereiche in der IT - Sicherheit}
