@@ -5,6 +5,7 @@
 \usepackage[top=3cm, bottom=2.5cm, left=3cm, right=4cm]{geometry}\usepackage[english,german]{babel} 
 \usepackage{csquotes}
 \usepackage{hyperref}
+\usepackage[verbose]{wrapfig}
 
 \usepackage[style=ieee]{biblatex}
  
@@ -30,7 +31,7 @@
     Leitfach: Mathematik
     
     \vskip 5em
-    Exposé zur Seminararbeit
+    Seminararbeit
     \vskip 2em
     
     {
@@ -59,17 +60,20 @@
 \pagebreak
 \section{Einleitung}
 
-\subsection{Die symmetrischen Verschlüsselung}
+In unserem aktuellen Zeitalter spielen die Informatik und alles was mit Computern zu tun hat eine immer größere Rolle. Es soll immer mehr digitalisiert werden und es werden viele Prozesse vereinfacht. Unteranderem sollen immer mehr Daten digital gespeichert werden. Gerade auch personenbezogene Daten, wie zum Beispiel Krankenakten oder auch Mitarbeiterdaten, wie Arbeitsverträge o.ä.. aber auch simple Dinge, wie Nachrichten, wie Emails oder Chat-Nachrichten. Aber einer der wichtigsten Punkte hierbei ist die Sicherheit dieser Daten. Als diese Daten noch sicher in Tresoren, abgeschottet von der Ausenwelt gelagert wurden, oder über einen Kurier übertragen wurden gab es keine Möglichkeit an diese Daten heranzukommen, außer es war möglich diese physisch zu erreichen. Das große Problem ist jetzt aber, dass seit diese Daten digital gelagert werden jeder sie erreichen kann, solange der Computer der diese speichert an das Internet angeschlossen ist oder der Netzwerkverkehr zwischen zwei Parteien einer digitalen Konversation mitgehört werden kann. Deshalb müssen diese verschlüsselt werdne, so dass auf sie nur zugegriffen werden kann, wenn auch die Berechtigung dafür besteht. 
+Bei den Verschlüsselungsverfahren muss zwischen symmetrischen und asymmetrischen Verschlüsselungsverfahren (auch: Public Key Verfahren) unterschieden werden. Der Unterschied hierbei besteht darin, dass bei symmetrischen Verschlüsselungsverfahren nur einen Schlüssel für die Ver- und Entschlüsselung verwendet. Diese bieten viele Vorteile, wie zum Beispiel eine kurze Schlüssellänge oder auch eine deutlich kleinere Verschlüsselungszeit. Allerdings kommt die symmetrische Verschlüsselung auch mit einigen Nachteilen, unteranderem \glqq setzt [sie] voraus, dass Sender und Empfänger einer Nachricht, und nur diese beiden ein gemeinsames
+Geheimnis den sogenannten Schlüssel, besitzen." \cite[S.7]{schwenk2010sicherheit}. Dies stellt sich aber in der Praxis als ein Problem dar, weil es nicht immer möglich ist sich vor der ersten verschlüsselten Kommunikation persönlich zu treffen, dies aber für eine symmetrische Verschlüsselung nötig ist, um den Schlüssel auszutauschen. Dafür wird eine andere Verschlüsselungsmethode benötigt, ein sogenanntes Public Key Verfahren. Diese hat den großen Vorteil, dass es einen öffentlichen und einen privaten Schlüssel gibt. Die Nachricht kann dann mit dem öffentlichen Schlüssel einer Person verschlüsselt und dann nur mit dem privaten Schlüssel wieder entschlüsselt werden, welcher privat gehalten wird. Ein mögliches Verfahren dafür ist der RSA-Algorithmus, der im folgenden erklärt werden soll.
 
-Bei symmetrischen Verschlüsselungsverfahren gibt es, anders als bei asymmetrischen Verfahren (auch: Public Key Verfahren), nur einen Schlüssel für die Ent- und Verschlüsselung. Diese bieten viele Vorteile, wie zum Beispiel eine kurze Schlüssellänge oder auch eine deutlich kleinere Verschlüsselungszeit. Allerdings kommt die symmetrische Verschlüsselung auch mit einigen Nachteilen, unteranderem "setzt [sie] voraus, dass Sender und Empfänger einer Nachricht, und nur diese beiden ein gemeinsames
-Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherheit}. Das stellt aber in der Praxis als ein Problem dar, weil es nicht immer möglich ist sich vor der ersten verschlüsselten Kommunikation persönlich zu treffen, dies aber für eine symmetrische Verschlüsselung nötig ist. Dafür wird eine andere Verschlüsselungsmethode benötigt, ein sogenanntes Public Key Verfahren. Hier liegt der Vorteil darin, das es einen öffentlichen und einen privaten Schlüssel gibt. Die Nachricht kann dann mit dem öffentlichen Schlüssel einer Person verschlüsselt und dann nur mit dem privaten Schlüssel wieder entschlüsselt werden. Ein Algorithmus dafür ist der RSA-Algorithmus, den ich im folgenden erklären möchte.
+
+%„Weg“ durch die Arbeit (was zuerst, danach, usw.)
+%Erst der Matheteil erklären, danach die schwachstellen und dann die Anwendungen in der IT Sicherheit
 
 \pagebreak
 
 
 \section{Begriffserklärungen}
 	\subsection{Modulo Operation} %Notwendigkeit?
-	Die Modulo Operation gibt den Rest einer ganzzahligen Division zurück.
+	Die Modulo Operation gibt den Rest einer ganzzahligen Division zurück:
 	$$ {7 \bmod 4 = 3} $$
 	$$ {16 \bmod 3 = 1} $$
 	
@@ -79,35 +83,36 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
 	So ist zum Beispiel das multiplikative Inverse $a$ von 3, $a=2$, weil: \\
 	${3 * 2 = 6 = 1 \bmod 5}$ \\
 	
-	Für das Beispiel ${5 * a = 1 \bmod 5}$ wäre $a=5$, weil \\
+	Für das Beispiel ${5 * a = 1 \bmod 5}$ wäre $a=5$, weil: \\
 	${5 * 5 = 25 = 1 \bmod 5}$ \\
 	
 	\subsection{Einwegverschlüsselungsverfahren}
-	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großem Quelltext eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man könnte eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Ein gutes Beispiel für eine Einwegfunktion, wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
-	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und diese: ${20 \bmod 3}$ beide als Ergebnis 2. Es lässt sich aber nicht zurückschließen mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256. Diese haben unteranderem die folgenden Anwendungen:
+	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großen Quelltexts eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man kann eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Es ist nicht möglich mit einem Fingerabdruck auf einen Menschen zu schließen, aber es haben auch nicht zwei Menschen den selben Fingerabdruck.\cite[S.11]{Beutelspacher2015-jl} Ein gutes Beispiel für eine Einwegfunktion wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
+	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und: ${20 \bmod 3}$ beide das Ergebnis 2. Es lässt sich aber nicht zurückschließen, mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256.\cite[S.11]{Beutelspacher2015-jl} Diese haben unteranderem die folgenden Anwendungen:
 	
 	%TODO Anwendungen Ausformulieren
 	\begin{itemize}
-	\item
+	\item Passwörter werden zum Beispiel nicht als Klartext gespeichert, sondern es wird nur der Wert einer Einwegfunktion f gespeichert. Es wird also f(Passwort) berechnet und dieser Wert dann an einer zentralen Stelle gespeichert. Wenn nun ein vorgebliches Passwort Passwort* eingeben wird, wird auch f(Passwort*) berechnet und dann mit dem gespeicherten f(Passwort) verglichen. \cite[S.22]{Beutelspacher2015-jl}
 	
+	\item Für die digitale Signatur wird auch der Wert einer Hashfunktion benutzt, in der Regel ist diese auch öffentlich sodass jeder weiß, welche Funktion benutzt wurde. Dazu mehr im Kapitel \ref{cha:digital_signature}. \cite[S.16]{Beutelspacher2015-jl}
+	
+	\item \glqq Wenn Sie sich zum Beispiel Software aus dem Internet laden, dann wird oft zusätzlich zur Datei die MD5-Prüziffer angegeben. Nach dem Download können Sie diese Prüziffer berechnen und durch Vergleich sicherstellen, dass die Datei ohne Fehler heruntergeladen wurde." \cite[S.81]{teschl2008mathematik}
 	\end{itemize}
 	
 	\label{ch:einweg}
-	\subsection{Eulersche $\phi$ Funktion}
+	\subsection{Eulersche $\phi$-Funktion}
 	\label{cha:phi}
 	
-	Die Eulersche $\phi$ Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das heißt der größte gemeinsame Teiler dieser Zahlen ist 1. Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ nicht durch ${2, 4, 5, 6, 7 }$ und $8$ teilbar ist. Bei Primzahlen ist die $\phi$ Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt: $${\phi(p) = p - 1}$$
+	Die Eulersche $\phi$-Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das bedeutet, dass der größte gemeinsame Teiler 1 ist. \cite[S.106]{teschl2008mathematik} Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ nicht durch ${2, 4, 5, 6, 7 }$ und $8$ teilbar ist. Bei Primzahlen ist die $\phi$-Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt, wenn $p$ eine Primzahl ist: $${\phi(p) = p - 1}$$
 	Nochdazu ist diese Funktion Multiplikativ, also gilt: ${\phi(p * q) = \phi(p) * \phi(q)}$.
-	Daraus folgt, das für Primzahlen gelten muss:
+	Daraus folgt, das für Primzahlen, hier $p$ und $q$, gelten muss:
 	$${\phi(p * q) = (p - 1) * (q - 1)}$$
 	
 	Somit ist es sehr einfach $\phi(n)$ zu berechnen, wenn $p$ und $q$ Primzahlen sind.
-	\subsection{Satz von Euler}
-	Nur wenn zu wenig text
-	
+		
 	\subsection{Der euklidische Algorithmus}
-	 Mit dem erweiterten Euklidischen Algorithmus kann der größte gemeinsame Teiler ggT(a,b) von zwei ganzen Zahlen a und b berechnet werden.
-	 Dabei wird in jedem Schritt $a / b = q$ gerechnet. Dabei wird nach jedem Schritt $a=b$ und $b = r$ gesetzt. $r$ ist dabei der Rest der division. Die Iteration endet, wenn $b=0$. Der größte gemeinsame Teiler ggT(a, b) ist dann $a$. Im Folgenden wird das ganze mit einem Beispiel, wo $a = 74$ und $b = 38$ ist. \\
+	 Mit dem euklidischen Algorithmus kann der größte gemeinsame Teiler ggT(a,b) von zwei ganzen Zahlen a und b berechnet werden.
+	 Dabei wird in jedem Schritt $a / b = q$ gerechnet. Dabei wird nach jedem Schritt $a=b$ und $b = r$ gesetzt. $r$ ist dabei der Rest der Division. Die Iteration endet, wenn $b=0$. Der größte gemeinsame Teiler ggT(a, b) ist dann $a$. \cite[S.94f]{teschl2008mathematik} Im Folgenden wird das Ganze an einem Beispiel mit $a = 74$ und $b = 38$ dargestellt: \\
 	 \begin{tabular}{ c c c c c c c}
  		a & : & b & = & q & & r \\ 
  		74 & : & 38 & = & 1 & Rest & 36\\ 
@@ -116,43 +121,66 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S. 7]{schwenk2010sicherhe
  		2 & : & 0 & \\
 	\end{tabular}\\
 	Bei diesem Beispiel wäre der ggT(a, b) nun 2.
-
 	
 \pagebreak
-\section{Der RSA - Algorithmus}
-		
+\section{Die Funktionsweise des RSA-Algorithmus}
+	\subsection{Die Prinzipien von RSA}
+	Das RSA-Verfahren bringt viele Vorteile mit sich, und besitzt die folgenden Eigenschaften:
+	
+	\begin{itemize}
+	\item Das RSA Verfahren ist nicht monoalphabetisch, solange man nicht einzelne Buchstaben verschlüsselt\footnote{Dazu mehr in Kapitel \ref{cha:mono_enc}}, es liegt also keine feste Zuordnung von einem unverschlüsselten zu einem verschlüsselten Zeichen vor. \cite[S.9]{frauenhofer}
+	\item \glqq RSA is nicht symmetrisch"\cite[S.9]{frauenhofer}, es bestehen also ein öffentlicher und ein privater Schlüssel.
+	\item Dadurch das ein Teil des Schlüssels öffentlich ist, ist es jedem Möglich, der diesen Teil des Schlüssels hat, dem Besitzer des privaten Schlüssels eine Nachricht zu schicken.\\ \glqq RSA eignet sich demnach auch für Kommunikation zwischen sehr vielen Sendern und einem Empfäger, da der für alle Sender erforderliche Teil des Schlüssels öffentlich ist." \cite[S.9]{frauenhofer}
+	
+	\item Wenn jemand im Besitz des öffentlichen Schlüssels ist, ist es ihm nicht möglich mit diesem in einer realistischen Zeit auf den privaten Schlüssel zu kommen. \footnote{Dazu mehr in Kapitel \ref{cha:primfaktorzerlegung}}
+	\item Mithilfe des privaten Schlüssels ist es sehr einfach möglich den verschlüsselten Inhalt zu entschlüsseln
+	
+	\end{itemize}
 	\subsection{Schlüsselgenerierung}
-Die für den RSA-Algorithmus benötigten Schlüssel können sehr einfach generiert werden. Der Verschlüsselungsschlüssel besteht dabei aus $(e, n)$ und er Entschlüsselungsschlüssel besteht aus $(d, n)$. Dabei steht $e$ für encryption und $d$ für decryption 
+Die für den RSA-Algorithmus benötigten Schlüssel können sehr einfach generiert werden. Der Verschlüsselungsschlüssel besteht dabei aus $(e, n)$ und er Entschlüsselungsschlüssel besteht aus $(d, n)$. Dabei steht $e$ für encryption und steht in keinem Zusammenhang mit der eulerschen Zahl e und $d$ für decryption 
 \begin{itemize}
 \item Als erstes werden zwei Primzahlen $p$ und $q$ gewählt, in einer reelen Anwendung sollte hierbei auf die in \ref{chap:primnumberselection} genannten Anforderungen geachtet werden  
 \item Mit diesen wird dann $n$ aus dem Produkt von $p$ und $q$ berechnet
-\item Danach wird eine große zufällige Zahl $d$ gewählt, welche teilerfremd zu ${\phi(n)}$\footnote{Zur einfachen Berechnung von ${\phi(n)}$ siehe \ref{cha:phi}} ist, das heißt:
+\item Danach wird eine große zufällige Zahl $e$ gewählt, welche teilerfremd zu ${\phi(n)}$\footnote{Zur einfachen Berechnung von ${\phi(n)}$ siehe \ref{cha:phi}} ist, das heißt:
 $${ggT(d, \phi(n)) = 1}$$ 
-\item Nun wird \textit{e} so berechnet, dass es das multiplikative Inverse von \textit{d} ist:
+\item Nun wird \textit{d} so berechnet, dass es das multiplikative Inverse von \textit{e} ist:
 $${e * d = 1 \bmod \phi(n)}$$
 \end{itemize}
 
-\begin{figure}
-\includegraphics[scale=0.3]{Orange_blue_public_private_keygeneration} \\
-\caption{Schlüsselgenerierung (aus \cite{wikipedia})}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{Orange_blue_public_private_keygeneration} \\
+\caption{Schlüsselgenerierung (aus \cite{wikipedia_keygen})}
 \label{fig:figure1}
 \end{figure}
 
 Jetzt hat man den Verschlüsselungsschlüssel bestehend aus $(e, n)$ und den Entschlüsselungsschlüssel $(d, n)$. \\
 $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese Rückschlüsse auf $d$ möglich machen.
-	
+
+Als Beispiel wählen wir $p=11$ und $q=13$.
+Als erstes wird dann $n$ berechnet:
+$$n = 11*13 = 143$$
+
+Danach wird $\phi (n)$ wie folgt berechnet:
+$$\phi(n) = (p-1)*(q-1) = \phi(11*13) = (11 - 1) * (13-1) = 10 * 12 = 120$$
+
+Als letzter Schritt werden noch $e$ und $d$ berechnet, wobei für $e$ die sehr häufig verwendete Zahl 65573 gewählt wird. $d$ wird dann aus $e$ und $\phi(n)$ berechnet:
+$$e * d = 1 \bmod \phi(n) = 65537 * d = 1 \bmod 120$$
+$$ d = 113$$
+
+
 	\subsection{Ver- und Entschlüsselung}
-	Als erstes müssen wir unsere Nachricht auf eine Länge zwischen 0 und $n-1$ bringen. (Für längere Nachrichten siehe \ref{cha:hole_text})
-	Zum Verschlüsseln unserer Nachricht \textit{m} werden nun der öffentliche Schlüssel ($e, n$) und $m \in \mathbb{N}$ benötigt. (\textit{e} und \textit{n} sind hierbei positive Zahlen)\footcite[][6]{rsaOriginalPaper} Danach wird \textit{m} wie folgt in \textit{c} verschlüsselt: 
+	Als erstes müssen wir unsere Nachricht $m$ in eine Zahl umwandeln.\footnote{Für den Umwandlungsprozess siehe \ref{chap:digital_text}} mit einer Länge zwischen 0 und $n-1$ bringen. (Für längere Nachrichten siehe \ref{cha:hole_text})
+	Zum Verschlüsseln unserer Nachricht \textit{m} werden nun der öffentliche Schlüssel ($e, n$) und $m \in \mathbb{N}$ und $m < n-1$ benötigt. (\textit{e} und \textit{n} sind hierbei positive Zahlen).\cite[6]{rsaOriginalPaper} Danach wird \textit{m} wie folgt in \textit{c} verschlüsselt: 
 	$$c = m^e \bmod n$$
 	Für die Entschlüsselung wird der gleiche Prozess wiederholt, nur das für \textit{m} diesmal \textit{c} verwendet wird und anstatt \textit{e} wird dann \textit{d} verwendet:
 	$$m = c^d \bmod n$$
 	
-	\begin{figure}
-	\includegraphics[scale=0.05]{Orange_blue_public_key_cryptography_de.svg.png} \\
-	\caption{Der Ver- und Entschlüsselungsprozess (aus \cite{wikipedia})}
-	\label{fig:figure1}
-	\end{figure}
+%	\begin{figure}[h!]
+%	\includegraphics[scale=0.1]{Orange_blue_public_key_cryptography_de.svg.png} \\
+%	\caption{Der Ver- und Entschlüsselungsprozess (aus \cite{wikipedia_enc_dec})}
+%	\label{fig:figure1}
+%	\end{figure}
 	
 	Als Beispiel verschlüsseln wir die Zahl $m = 76$. Hierbei sind $e=65537$ und $n=143$.
 
@@ -163,8 +191,7 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
  	& = 98
 	\end{split}
 	\end{equation}
-	Unsere Verschlüsselte Nachricht ist nun also $c = 98$. Um daraus wieder \textit{m} zu berechen brauchen wir jetzt noch $d$.
-
+	Unsere Verschlüsselte Nachricht ist nun also $c = 98$. Um daraus wieder \textit{m} zu berechen, wird mithilfe von $d$ wieder $m$ berechnet:
 	\begin{equation}
 	\begin{split}
 	m & = c^d \bmod n \\
@@ -183,9 +210,9 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 	Sind a und n teilerfremde Zahlen mit $1 < a < n$, so gilt
 	$$a^{\phi (n)} \equiv 1 \bmod n $$
 	
-	Dieser Satz soll hier nicht bewiesen werden, sondern es soll im folgenden die Gleichung (\ref{eq:fermat}) bewiesen werden, wenn $x \neq p$ und $x \neq q$ gilt, da für den Satz von Euler-Fermat $x$ und $n = p*q$ teilerfremd sein müssen. $x$ stellt hierbei unsere Nachricht m und y unsere verschlüsselte Nachricht c da. \\
-	Es folgt also:
+	Es soll im folgenden die Gleichung (\ref{eq:fermat}) bewiesen werden, wenn $x \neq p$ und $x \neq q$ gilt, da für den Satz von Euler-Fermat $x$ und $n = p*q$ teilerfremd sein müssen. $x$ stellt hierbei unsere Nachricht m und y unsere verschlüsselte Nachricht c da. \\
 	
+	Es folgt die Umformung von \citeauthor{frauenhofer}:
 	\begin{align*}
 	 y^d \bmod n & = (x^e \bmod n)^d \bmod n & \\
 	 & = (x^e)^d \bmod n &\\
@@ -197,9 +224,9 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
  	 & =(1^k \bmod n) * (x \bmod n) \bmod n &  \parbox[t]{4cm}{wegen des Satzes von Euler-Fermat (sofern x und n teilerfremd sind), da $m = (p - 1)(q - 1) = \phi(n)$ gesetzt wurde} \\
  	 & = 1 * x \bmod n & \\
  	 & = x &
- 	\end{align*}
+ 	\end{align*} \cite[S.15]{frauenhofer}
 
-	Mit dieser Umformung konnte die Gleichung \ref{eq:fermat} bewiesen werden 
+	Mit dieser Umformung konnte die Gleichung (\ref{eq:fermat}) bewiesen werden 
 	
 	\subsection{Verschlüsselung ganzer Texte}
 		\label{cha:hole_text}
@@ -209,14 +236,16 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 
 \section{Mögliche Angriffspunkte}
 	\subsection{Primfaktorzerlegung}
+	\label{cha:primfaktorzerlegung}
 	Es ist sehr schwierig eine Zahl $n$, die keine Primzahl ist, in ihre Primfaktoren zu zerlegen. Aktuell gibt es keinen Algorithmus, der dies für sehr große Zahlen bewältigen kann. Sollte es einen Algorithmus geben, der die Primfaktorzerlegung in sehr kurze Zeit bewältigen kann, würde das heißen, dass der RSA-Algorithmus nicht mehr sicher ist, da man sich dann sehr leicht $p$ und $q$ aus dem immer veröffentlichten $n$ berechnen kann und somit alle Schlüssel berechnen kann.
 	
-	Zum Beispiel benötigt der Quadratic Sieve Algorithmus aktuell um eine Zahl mit 512 Bits zu zerlegen aktuell bei 200.000.000 Befehle pro Sekunde in etwa 11700 Jahre. \cite[S. 115]{Beutelspacher2015-jl}
+	Zum Beispiel benötigt der Quadratic Sieve Algorithmus aktuell um eine Zahl mit 512 Bits zu zerlegen aktuell bei 200.000.000 Befehle pro Sekunde in etwa 11700 Jahre. \cite[S.115]{Beutelspacher2015-jl}
 	Aktuell wird ein Schlüssel mit mehr als 3000 Bits als sicher angesehen. \cite[29]{bsireco}
 	%TODO erklärung bit größe
 	 
 	\subsection{Monoalphabetische Verschlüsselung}
-	Sehr einfachen Kryptosystem, wie z.B. die Caesar-Verschlüsselung, setzen oftmals auf eine Monoalphabetische Verschlüsselung, das heißt es wird jedem Buchstaben ein anderer Buchstabe zugeordnet. Wenn man immer einzelne Buchstaben mit dem RSA-Algorithmus verschlüsselt, hat man das Problem, das diese immer dem gleichen verschlüsselten Buchstaben zugeordnet werden. (Wie in Grafik \ref{fig:figure4} bei A und B zu sehen). Dadurch ist die Verschlüsselung dann nicht mehr sicher und kann sehr einfach mit Hilfe von statistischen Tabellen über die Häufigkeit eines Buchstabens geknackt werden. \footnote{Für mehr Infos dazu siehe \cite{mono}}
+	\label{cha:mono_enc}
+	Sehr einfachen Kryptosystem, wie z.B. die Caesar-Verschlüsselung, setzen oftmals auf eine Monoalphabetische Verschlüsselung, das heißt es wird jedem Buchstaben ein anderer Buchstabe zugeordnet. Wenn man immer einzelne Buchstaben mit dem RSA-Algorithmus verschlüsselt, hat man das Problem, das diese immer dem gleichen verschlüsselten Buchstaben zugeordnet werden. (Wie in Abbildung \ref{fig:figure4} bei A und B zu sehen). Dadurch ist die Verschlüsselung dann nicht mehr sicher und kann sehr einfach mit Hilfe von statistischen Tabellen über die Häufigkeit eines Buchstabens geknackt werden. \footnote{Für mehr Infos dazu siehe \cite{mono}}
 	
 	Um diese Schwachstelle zu beseitigen, kann man anstatt einzelne Buchstaben zu verschlüsseln, ganze Blöcke an Buchstaben verschlüsseln. Hierbei ist zu beachten, dass jeder Block, umgerechnet in eine Zahl, kleiner als \textit{n} sein muss. Jetzt ist es nicht mehr möglich Rückschlüsse auf die verwendeten Buchstaben zu machen, z.B. wurden bei den unteren beiden Beispielen in Abbildung \ref{fig:figure4} nur A und B getauscht und es kommt eine ganz andere Zahl raus.
 
@@ -227,19 +256,15 @@ $p$, $q$ und $\phi(n)$ sollten geheim gehalten bzw vernichtet werden, da diese R
 \label{fig:figure4}
 \end{figure}
 	
-\subsection{Die Wahl der Primzahlen}
-\label{chap:primnumberselection}
-Wahrscheinlich entfernen
-
- nicht zu nah beieinander \cite{rowland} \\
-
 \pagebreak
 
 \section{Anwendungsbereiche in der IT - Sicherheit}
 	\subsection{Digitale Nachrichten}
-Um eine Nachricht, hier genannt \textit{m}, mit einem Computer verarbeiten zu können, muss diese erst in Zahlen umgewandelt werden. Dafür existiert der ~ASCII~ Standard, mit dem Computer Buchstaben in Zahlen umwandeln können. Jede Nachricht \textit{m} muss kleiner sein als \textit{n}. In der Realität spielt das allerdings keine Rolle, da normalerweise Werte für \textit{n} mit mehr als 100 Stellen verwendet werden und der normale ASCII Standard 7-Bit Werte und der erweiterte ASCII Standard 8-Bit Werte verwendet.\footnote{7-Bit hat Zahlen bis 128, 8-Bit bis 256}
+	\label{chap:digital_text}
+Um eine Nachricht, hier genannt \textit{m}, mit einem Computer verarbeiten zu können, muss diese erst in Zahlen umgewandelt werden. Dafür existiert der ~ASCII~ Standard, mit dem Computer Buchstaben in Zahlen umwandeln können. Jede Nachricht \textit{m} muss kleiner sein als \textit{n}. In der Realität spielt das allerdings keine Rolle, da normalerweise Werte für \textit{n} mit mehr als 100 Stellen verwendet werden und der normale ASCII Standard 7-Bit Werte und der erweiterte ASCII Standard 8-Bit Werte verwendet.\footnote{7-Bit hat Zahlen bis 128, 8-Bit bis 256} \cite[S.5]{rowland}
 	
 	\subsection{Digitale Signatur}
+	\label{cha:digital_signature}
 	Der RSA-Algorithmus kann auch genutzt werden, um Nachrichten zu signieren. Durch das Signieren von z.B. Emails kann der Empfänger sicherstellen, dass die Nachricht von dem Besitzer des zugehörigen privaten Schlüssels verschickt wurde. Diese Funktion der Signatur wird auch genutzt, um die Fälschungssicherheit und Originalität von  Dokumenten sicherzustellen. Um bei einer Signatur nicht die Länge der Nachricht zu verdoppeln, wird diese mithilfe einer Einwegfunktion auf eine vordefinierte Länge gebracht.\footnote{Siehe Kapitel \ref{ch:einweg} auf Seite \pageref{ch:einweg}}\\
 
 Als erstes wandelt man die Nachricht mithilfe eines Standards in Zahlen um. Mithilfe eines Hashing-Algorithmus wird nun der Hash-Wert der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
@@ -301,18 +326,21 @@ Und jetzt werden diese Beiden wieder verglichen und es wird ersichtlich, das $m$
 	 	
 	\subsection{Hybride Verschlüsselung}
 		\label{cha:hybrid}
-		\begin{figure}
 		
-\includegraphics[scale=0.45]{rsa_time} \\
+		
+		Wenn man große Texte bzw. Dateien verschlüsseln möchte, brauchen verschieden Algorithmen unterschiedlich lange. Bei der Verschlüsselung mit dem RSA-Algorithmus entsteht das große Problem, dass dieser für immer größer  werdende Texte immer länger braucht, wie in Abbildung \ref{fig:figure5} zu sehen ist.
+
+\begin{figure}[h]		
+\includegraphics[scale=0.6]{rsa_time} \\
 \caption{Decryption time vs. File size for DES, 3DES, AES, Blowfish and RSA (aus \cite{rsatime})}
 \label{fig:figure5}
 \end{figure}
-		
-		Wenn man große Texte bzw. Dateien verschlüsseln möchte, brauchen verschieden Algorithmen unterschiedlich lange. Bei der Verschlüsselung mit dem RSA-Algorithmus entsteht das große Problem, dass dieser für immer größer  werdende Texte immer länger braucht, wie in Abbildung \ref{fig:figure5} zu sehen ist. 
+
 
 		Hierfür kann dann das Konzept der hybriden Verschlüsselung genutzt werden. Dabei kombiniert man eine asymmetrisches und eines symmetrisches Verschlüsselungsverfahren. Diese bringt den Vorteil mit sich, dass die Vorteile  beider Verfahren kombiniert werden können. Das ganze hat aber auch einige Nachteile z.B. muss man dafür beide Verfahren implementieren und die Sicherheit der hybriden Verschlüsselung ist jetzt abhängig von zwei verschiedenen Verschlüsselungsalgorithmen. \\
 		Um nun eine Nachricht verschlüsselt versenden zu können, ohne lange auf die Verschlüsselung warten zu müssen, wird als erstes ein symmetrischer Schlüssel zufällig generiert werden. Mit diesem wird dann die Nachricht verschlüsselt. Dann wird der asymmetrisch verschlüsselte symmetrische Schlüssel zusammen mit der verschlüsselten Nachricht versendet.
 
+\section{Fazit und Ausblick}
 
 \pagebreak
 \section{Anhang}
