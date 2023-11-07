@@ -80,7 +80,7 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S.7]{schwenk2010sicherhei
 	\subsection{Multiplikatives Inverses}
 	"Das multiplikativ inverse Element $a^{-1}$ eines Elements a in der Gruppe $\mathbb{Z}_n ^*$ ist das eindeutig bestimmte Element, für das gilt $${a^{-1} * a  =  a * a^{-1}  =  1}$$ wobei 1 das neutrale Element der Gruppe ist." \cite{hwlang} \\
 	
-	So ist zum Beispiel das multiplikative Inverse $a$ von 3, $a=2$, weil: \\
+	So ist zum Beispiel das multiplikative Inverse $a$ von 3 bei einem Modulo von 5 $a=2$, weil: \\
 	${3 * 2 = 6 = 1 \bmod 5}$ \\
 	
 	Für das Beispiel ${5 * a = 1 \bmod 5}$ wäre $a=5$, weil: \\
@@ -88,11 +88,11 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S.7]{schwenk2010sicherhei
 	
 	\subsection{Einwegverschlüsselungsverfahren}
 	Mithilfe eines Einwegverschlüsselungsverfahrens (auch Hashfunktion) kann anhand eines beliebig großen Quelltexts eine Prüfsumme erzeugt werden, welche in der Regel eine fest definierte Länge hat. Man kann eine Hashfunktion auch mit einem Fingerabdruck vergleichen. Es ist nicht möglich mit einem Fingerabdruck auf einen Menschen zu schließen, aber es haben auch nicht zwei Menschen den selben Fingerabdruck.\cite[S.11]{Beutelspacher2015-jl} Ein gutes Beispiel für eine Einwegfunktion wäre die Modulo-Operation, da sich hier aus dem Ergebnis nicht feststellen lässt, aus welchen Zahlen das Ergebnis berechnet wurde. \\
-	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und: ${20 \bmod 3}$ beide das Ergebnis 2. Es lässt sich aber nicht zurückverfolgen, mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256.\cite[S.11]{Beutelspacher2015-jl} Diese haben unteranderem die folgenden Anwendungen:
+	Zum Beispiel haben die Modulo Operation: ${14 \bmod 6}$  und: ${20 \bmod 3}$ beide das Ergebnis 2. Es lässt sich aber nicht zurückverfolgen, mit welchen Zahlen die Modulo Operation durchgeführt wurde, da es dafür unendlich viele Fälle gibt. Es gibt aber noch einige weitere Einwegfunktionen, wie z.B. MD5 oder SHA-256 \cite[S.11]{Beutelspacher2015-jl}. Diese haben unteranderem die folgenden Anwendungen:
 	
 	%TODO Anwendungen Ausformulieren
 	\begin{itemize}
-	\item Passwörter werden zum Beispiel nicht als Klartext gespeichert, sondern es wird nur der Wert einer Einwegfunktion f gespeichert. Es wird also f(Passwort) berechnet und dieser Wert dann an einer zentralen Stelle gespeichert. Wenn nun ein vorgebliches Passwort Passwort* eingeben wird, wird auch f(Passwort*) berechnet und dann mit dem gespeicherten f(Passwort) verglichen. Wenn diese Werte dann übereinstimmen ist sichergestellt, das das vorgebliche Passwort mit dem gespeichertem übereinstimmt.  \cite[S.22]{Beutelspacher2015-jl}
+	\item Passwörter werden zum Beispiel nicht als Klartext gespeichert, sondern es wird nur der Wert einer Einwegfunktion f gespeichert. Es wird also f(Passwort) berechnet und dieser Wert dann an einer zentralen Stelle gespeichert. Wenn nun ein vorgebliches Passwort Passwort* eingeben wird, wird auch f(Passwort*) berechnet und dann mit dem gespeicherten f(Passwort) verglichen. Wenn diese Werte dann übereinstimmen ist sichergestellt, das das vorgebliche Passwort mit dem gespeichertem übereinstimmt. \cite[S.22]{Beutelspacher2015-jl}
 	
 	\item Für die digitale Signatur wird auch der Wert einer Hashfunktion benutzt, in der Regel ist diese auch öffentlich sodass jeder weiß, welche Funktion benutzt wurde. Dazu mehr im Kapitel \ref{cha:digital_signature}. \cite[S.16]{Beutelspacher2015-jl}
 	
@@ -103,7 +103,7 @@ Geheimnis den sogenannten Schlüssel, besitzen." \cite[S.7]{schwenk2010sicherhei
 	\subsection{Eulersche $\phi$-Funktion}
 	\label{cha:phi}
 	
-	Die Eulersche $\phi$-Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das bedeutet, dass der größte gemeinsame Teiler 1 ist. \cite[S.106]{teschl2008mathematik} Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ keine gemeinsamen Teiler mit ${1; 2; 4; 5; 7; 8}$ hat. Bei Primzahlen ist die $\phi$-Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt, wenn $p$ eine Primzahl ist: $${\phi(p) = p - 1}$$
+	Die Eulersche $\phi$-Funktion gibt für jede natürliche Zahl ${n > 0}$ an, wie viele positive natürliche Zahlen es gibt, die teilerfremd zu n sind. Das bedeutet, dass der größte gemeinsame Teiler 1 ist \cite[S.106]{teschl2008mathematik}. Zum Beispiel ist ${\phi(9) = 6}$, da ${9}$ keine gemeinsamen Teiler mit ${1; 2; 4; 5; 7; 8}$ hat. Bei Primzahlen ist die $\phi$-Funktion sehr einfach zu berechnen, da diese nur durch sich selber und 1 teilbar sind. Somit gilt, wenn $p$ eine Primzahl ist: $${\phi(p) = p - 1}$$
 	Noch dazu ist diese Funktion multiplikativ, also gilt: ${\phi(p * q) = \phi(p) * \phi(q)}$.
 	Daraus folgt, das für Primzahlen, hier $p$ und $q$, gelten muss:
 	$${\phi(p * q) = (p - 1) * (q - 1)}$$
@@ -160,7 +160,7 @@ $$n = 11*13 = 143$$
 Danach wird $\phi (n)$ wie folgt berechnet:
 $$\phi(n) = (p-1)*(q-1) = \phi(11*13) = (11 - 1) * (13-1) = 10 * 12 = 120$$
 
-Als letzter Schritt werden noch $e$ und $d$ berechnet, wobei für $e$ die sehr häufig verwendete Zahl 65537 gewählt wird. \cite[S.3]{eNumber}  $d$ wird dann aus $e$ und $\phi(n)$ berechnet:
+Als letzter Schritt werden noch $e$ und $d$ berechnet, wobei für $e$ die sehr häufig verwendete Zahl 65537 gewählt wird. \cite[S.2735]{eNumber}  $d$ wird dann aus $e$ und $\phi(n)$ berechnet:
 $$e * d = 1 \bmod \phi(n) = 65537 * d = 1 \bmod 120$$
 $$ d = 113$$
 
@@ -241,7 +241,6 @@ Wie alle Arten der Verschlüsselung, weist der RSA Algorithmus mehrere potentiel
 	
 	Zum Beispiel benötigt der Quadratic Sieve Algorithmus aktuell um eine Zahl mit 512 Bits zu zerlegen aktuell bei 200.000.000 Befehle pro Sekunde in etwa 11700 Jahre. \cite[S.115]{Beutelspacher2015-jl}
 	Aktuell wird ein Schlüssel mit mehr als 3000 Bits als sicher angesehen. \cite[29]{bsireco}
-	%TODO erklärung bit größe
 	 
 	\subsection{Monoalphabetische Verschlüsselung}
 	\label{cha:mono_enc}
@@ -265,14 +264,14 @@ Um eine Nachricht, hier genannt \textit{m}, mit einem Computer verarbeiten zu k�
 	
 	\subsection{Digitale Signatur}
 	\label{cha:digital_signature}
-	Der RSA-Algorithmus kann auch genutzt werden, um Nachrichten zu signieren. Durch das Signieren von z.B. Emails kann der Empfänger sicherstellen, dass die Nachricht von dem Besitzer des zugehörigen privaten Schlüssels verschickt wurde. Diese Funktion der Signatur wird auch genutzt, um die Fälschungssicherheit und Originalität von  Dokumenten sicherzustellen. Um bei einer Signatur nicht die Länge der Nachricht zu verdoppeln, wird diese mithilfe einer Einwegfunktion auf eine vordefinierte Länge gebracht. Denn wenn man die ganze Nachricht verschlüsseln würde, würde sich die Länge einer signierten Nachricht verdoppeln, da diese dann aus der Nachricht und der verschlüsselten Nachricht bestehen würde. \footnote{Siehe Kapitel \ref{ch:einweg} auf Seite \pageref{ch:einweg}}\\
+	Der RSA-Algorithmus kann auch genutzt werden, um Nachrichten zu signieren. Durch das Signieren von z.B. Emails kann der Empfänger sicherstellen, dass die Nachricht von dem Besitzer des zugehörigen privaten Schlüssels verschickt wurde. Diese Funktion der Signatur wird auch genutzt, um die Fälschungssicherheit und Originalität von  Dokumenten sicherzustellen. Um bei einer Signatur nicht die Länge der Nachricht zu verdoppeln, wird diese mithilfe einer Einwegfunktion auf eine vordefinierte Länge gebracht. Denn wenn man die ganze Nachricht verschlüsseln würde, würde sich die Länge einer signierten Nachricht verdoppeln, da diese dann aus der Nachricht und der verschlüsselten Nachricht bestehen würde. \cite[S.15f]{Beutelspacher2015-jl} \footnote{Siehe Kapitel \ref{ch:einweg} auf Seite \pageref{ch:einweg}}\\
 
 Als erstes wandelt man die Nachricht mithilfe eines Standards in Zahlen um. Mithilfe eines Hashing-Algorithmus wird nun der Hash-Wert der zu signierenden Nachricht berechnet. Dieser Wert wird dann mit dem privaten Schlüssel, dem Encryption-Key, der normalerweise der öffentliche Schlüssel ist, verschlüsselt. %Schöner formulieren
-	Der Decryption-Key wird dann, anders als wenn man eine geheime Nachricht versenden will, veröffentlicht.\\
+	Der Decryption-Key wird dann, anders als wenn man eine geheime Nachricht versenden will, veröffentlicht. \cite[S.15f]{Beutelspacher2015-jl}\\
 	Die originale Nachricht wird dann zusammen mit der digitalen Signatur verschickt und der Empfänger entschlüsselt diese dann mithilfe des öffentlichen Schlüssels wie folgt:\\
 	Als erstes generiert der Empfänger mithilfe des Hash-Algorithmus einen Hash-Wert von der Nachricht, die auf ihre Echtheit überprüft werden soll. Dann wird mit dem öffentlichen Schlüssel des Senders der, an die Nachricht angehängte, verschlüsselte Hash-Wert des Senders entschlüsselt. \\
 Wenn der generierte und der entschlüsselte Hash-Wert übereinstimmen, kann sicher festgestellt werden, dass die Nachricht nicht verändert wurde. \\
-Wenn eine dritte Person die Nachricht abändern würde, wäre der Hash-Wert beim Empfänger für diese Nachricht ein anderer, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, ob die Nachricht im Original vorliegt, denn wenn dem nicht so ist stimmen die Hash-Werte nicht mehr überein.\\
+Wenn eine dritte Person die Nachricht abändern würde, wäre der Hash-Wert beim Empfänger für diese Nachricht ein anderer, da der Hash-Algorithmus schon bei der Änderung eines einzelnen Bits einen anderen Hash-Wert ausgibt. Wenn dieser dann mit dem verschlüsselten Hash-Wert verglichen wird, kann festgestellt werden, ob die Nachricht im Original vorliegt, denn wenn dem nicht so ist stimmen die Hash-Werte nicht mehr überein. \cite[S.15f]{Beutelspacher2015-jl}\\
 
 
 %TODO wenn noch mehr text  --> https/tls
@@ -283,7 +282,7 @@ Wenn eine dritte Person die Nachricht abändern würde, wäre der Hash-Wert beim
 \label{fig:figure3}
 \end{figure}
 
-Das ganze funktioniert dann wie folgt:
+Das ganze funktioniert dann wie folgt nach \citeauthor{Beutelspacher2015-jl} aus \cite[S.15f]{Beutelspacher2015-jl}:
 
 Als erstes berechnet man den Hash-Wert mithilfe einer Einwegfunktion:
 $$ {h_{berechnet} = e(m)} $$
@@ -336,13 +335,13 @@ Werden nun beide Ergebnisse verglichen, so wird ersichtlich, dass die Nachricht 
 \end{figure}
 
 
-		Hierfür kann dann das Konzept der hybriden Verschlüsselung genutzt werden. Dabei kombiniert man eine asymmetrisches und eines symmetrisches Verschlüsselungsverfahren. Dadurch ist es möglich, die Vorteile beider Verfahren zu kombinieren. Allerdings entstehen durch die hybride Verschlüsselung einige Nachteile beispielsweise muss man dafür beide Verfahren implementieren und die Sicherheit der hybriden Verschlüsselung ist jetzt abhängig von zwei verschiedenen Verschlüsselungsalgorithmen. Das heißt, wenn eines der Verfahren nicht mehr als sicher angesehen wird, es möglich ist, die Verschlüsselung zu durchbrechen, da entweder die symmetrische Verschlüsselung nicht mehr sicher ist oder der symmetrische Schlüssel aus dem asymmetrischen Verfahren extrahiert werden kann. \\
-		Um nun eine Nachricht verschlüsselt versenden zu können, ohne lange auf die Verschlüsselung warten zu müssen, wird als erstes ein symmetrischer Schlüssel zufällig generiert. Mit diesem wird dann die Nachricht verschlüsselt. Dann wird der asymmetrisch verschlüsselte symmetrische Schlüssel zusammen mit der verschlüsselten Nachricht versendet.
+		Hierfür kann dann das Konzept der hybriden Verschlüsselung genutzt werden. Dabei kombiniert man eine asymmetrisches und eines symmetrisches Verschlüsselungsverfahren. Dadurch ist es möglich, die Vorteile beider Verfahren zu kombinieren. Allerdings entstehen durch die hybride Verschlüsselung einige Nachteile beispielsweise muss man dafür beide Verfahren implementieren und die Sicherheit der hybriden Verschlüsselung ist jetzt abhängig von zwei verschiedenen Verschlüsselungsalgorithmen. Das heißt, wenn eines der Verfahren nicht mehr als sicher angesehen wird, es möglich ist, die Verschlüsselung zu durchbrechen, da entweder die symmetrische Verschlüsselung nicht mehr sicher ist oder der symmetrische Schlüssel aus dem asymmetrischen Verfahren extrahiert werden kann. \cite[S.18f]{schwenk2010sicherheit}\\
+		Um nun eine Nachricht verschlüsselt versenden zu können, ohne lange auf die Verschlüsselung warten zu müssen, wird als erstes ein symmetrischer Schlüssel zufällig generiert. Mit diesem wird dann die Nachricht verschlüsselt. Dann wird der asymmetrisch verschlüsselte symmetrische Schlüssel zusammen mit der verschlüsselten Nachricht versendet. \cite[S.18f]{schwenk2010sicherheit}
 
 \pagebreak
 
 \section{Fazit und Ausblick}
-Der RSA-Algorithmus ist zweifellos eine der bedeutendsten Entwicklungen in der modernen Kryptographie und spielt eine entscheidende Rolle in der IT-Sicherheit. Er wurde 1977 von Ron Rivest, Adi Shamir und Leonard Adleman entwickelt und hat sich seither als eine der sichersten Methoden zur Verschlüsselung von Daten etabliert. Die Sicherheit des RSA-Algorithmus liegt darin, dass es nicht möglich ist eine Zahl in einer angemessenen Zeit in ihre Primfaktoren zu zerlegen. Ein Schlüsselpaar besteht immer aus zwei Teilen, ein Teil ist der dem encryption Teil $e$ beim öffentlichen und der decryption Teil $d$ beim privaten Schlüssel. Der andere Teil besteht aus $n$ und berechnet sich von den zufällig gewählten Primzahlen $p$ und $q$. Um ganze Texte verschlüsseln zu können, muss man diese in kleinere Teile unterteilen, da die Nachrichtenlänge nicht kleiner als $m$ sein darf. Mithilfe des RSA-Algorithmus können dann digitale Nachrichten versendet werden, ohne das sich die austauschenden Parteien im vorhinein treffen mussten. Für die Umwandlung von Text wird heutzutage meistens der ASCII Standard verwendet, welcher aus 7-Bit Werten besteht. Ein weiterer großer Anwendungsbereich sind digitale Signaturen, wo der mit einer Einwegfunktion berechnete Hashwert verschlüsselt wird und an die Nachricht angehängt wird. Dann kann jeder mithilfe des öffentlichen Schlüssels des Veröffentlichers die Echtheit der Nachricht validieren. Und auch sehr lange Texte können sehr einfach mithilfe des RSA-Verfahrens und einem weiteren symmetrischen Verfahren verschlüsselt werden. Dafür muss der symmetrische Schlüssel mit dem öffentlichen Schlüssel des Empfängers verschlüsselt werden und dann wird die ganze Nachricht nur noch mit dem deutlich schnelleren symmetrischen Verfahren verschlüsselt. Allerdings gibt es heutzutage auch schon effizientere asymmetrische Verschlüsselungsverfahren, unteranderem das EdDSA-Verfahren, was auf Edwards-Kurven basiert und eine deutlich kürzere Schlüsselänge als das RSA Verfahren hat. Noch dazu ist das EdDSA-Verfahren deutlich schneller im Ver- und Entschlüsseln als der RSA-Algorithmus. Das EdDSA Verfahren findet immer mehr Beliebtheit aufgrund seiner Vorteile, dennoch ist das RSA-Verfahren das aktuell am meisten verwendete asymmetrische Verschlüsselungsverfahren auf der Welt.
+Der RSA-Algorithmus ist zweifellos eine der bedeutendsten Entwicklungen in der modernen Kryptographie und spielt eine entscheidende Rolle in der IT-Sicherheit. Er wurde 1977 von Ron Rivest, Adi Shamir und Leonard Adleman entwickelt und hat sich seither als eine der sichersten Methoden zur Verschlüsselung von Daten etabliert. Die Sicherheit des RSA-Algorithmus liegt darin, dass es nicht möglich ist eine Zahl in einer angemessenen Zeit in ihre Primfaktoren zu zerlegen. Ein Schlüsselpaar besteht immer aus zwei Teilen, ein Teil ist der dem encryption Teil $e$ beim öffentlichen und der decryption Teil $d$ beim privaten Schlüssel. Der andere Teil besteht aus $n$ und berechnet sich von den zufällig gewählten Primzahlen $p$ und $q$. Um ganze Texte verschlüsseln zu können, muss man diese in kleinere Teile unterteilen, da die Nachrichtenlänge nicht kleiner als $m$ sein darf. Mithilfe des RSA-Algorithmus können dann digitale Nachrichten versendet werden, ohne das sich die austauschenden Parteien im vorhinein treffen mussten. Für die Umwandlung von Text wird heutzutage meistens der ASCII Standard verwendet, welcher aus 7-Bit Werten besteht. Ein weiterer großer Anwendungsbereich sind digitale Signaturen, wo der mit einer Einwegfunktion berechnete Hashwert verschlüsselt wird und an die Nachricht angehängt wird. Dann kann jeder mithilfe des öffentlichen Schlüssels des Veröffentlichers die Echtheit der Nachricht validieren. Und auch sehr lange Texte können sehr einfach mithilfe des RSA-Verfahrens und einem weiteren symmetrischen Verfahren verschlüsselt werden. Dafür muss der symmetrische Schlüssel mit dem öffentlichen Schlüssel des Empfängers verschlüsselt werden und dann wird die ganze Nachricht nur noch mit dem deutlich schnelleren symmetrischen Verfahren verschlüsselt. Allerdings gibt es heutzutage auch schon effizientere asymmetrische Verschlüsselungsverfahren, unteranderem das EdDSA-Verfahren, was auf Edwards-Kurven basiert und eine deutlich kürzere Schlüsselänge als das RSA Verfahren hat. Noch dazu ist das EdDSA-Verfahren deutlich schneller im Ver- und Entschlüsseln als der RSA-Algorithmus \cite{other_keys}. Das EdDSA Verfahren findet immer mehr Beliebtheit aufgrund seiner Vorteile, dennoch ist das RSA-Verfahren das aktuell am meisten verwendete asymmetrische Verschlüsselungsverfahren auf der Welt.
 
 
 \pagebreak
